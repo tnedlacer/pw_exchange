@@ -20,3 +20,5 @@
 
 /nbproject
 /db/schema.rb
+/rsa/rsa_pub.pem
+/rsa/rsa_priv.pem
