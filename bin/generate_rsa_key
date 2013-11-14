@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'openssl'
+
+rsa_path = File.expand_path('../../rsa',  __FILE__)
+rsa = OpenSSL::PKey::RSA.generate(2048)
+
+Dir::mkdir(rsa_path, 0755) unless File.exist?(rsa_path)
+
+[
+  ["rsa_priv.pem", rsa, 0600],
+  ["rsa_pub.pem", rsa.public_key, 0644]
+].map do |filename, pkey, perm|
+  filepath = File.join(rsa_path, filename)
+  if File.exist?(filepath)
+    answer = nil
+    until(["y", "n"].include?(answer.to_s))
+      print "Do you want to overwrite the \"#{filepath}\"?[y/N]"
+      answer = STDIN.gets.to_s.chomp.downcase
+      answer = "n" if answer.empty?
+    end
+    next if answer == "n"
+  end
+  File.open(filepath, "w", perm){|f| f.puts pkey.to_s }
+end
