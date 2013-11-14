@@ -18,9 +18,16 @@ class KeyManager
   ].map do |rsa_methods, base64_method|
     rsa_methods.map do |rsa_method|
       define_method(rsa_method){|str| rsa.try(rsa_method, str).force_encoding(Encoding::UTF_8) }
-      define_method("#{rsa_method}_with_#{base64_method}"){|str|
-        self.try(rsa_method, Base64.try(base64_method, str))
-      }
+      case base64_method
+      when :encode64
+        define_method("#{rsa_method}_with_#{base64_method}"){|str|
+          Base64.try(base64_method, self.try(rsa_method, str))
+        }
+      when :decode64
+        define_method("#{rsa_method}_with_#{base64_method}"){|str|
+          self.try(rsa_method, Base64.try(base64_method, str))
+        }
+      end
     end
   end
   
