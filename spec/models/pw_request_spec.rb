@@ -9,4 +9,15 @@ describe PwRequest do
       end
     end
   end
+  
+  it "assign_encrypted_attributes" do
+    key_manager = KeyManager.instance
+    pw_request = PwRequest.new
+    {password: "testtesttest", email: "testtest@example.com"}.map do |attr, value|
+      pw_request.assign_encrypted_attributes({
+        attr => key_manager.public_encrypt_with_encode64(value)
+      })
+      expect(pw_request.try(attr)).to eql(value)
+    end
+  end
 end
