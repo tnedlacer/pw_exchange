@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
       if I18n.available_locales.include?(locale)
         cookies[:locale] = locale
       end
+    rescue
     ensure
       I18n.locale = cookies[:locale] || I18n.default_locale
     end
