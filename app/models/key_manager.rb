@@ -31,4 +31,16 @@ class KeyManager
     end
   end
   
+  module ActiveRecord
+    def assign_encrypted_attributes(encrypted_attributes)
+      key_manager = KeyManager.instance
+      decrypt_attributes = Hash[
+        encrypted_attributes.map do |attribute, encrypted_value|
+          [attribute, key_manager.private_decrypt_with_decode64(encrypted_value.to_s)]
+        end
+      ]
+      self.assign_attributes(decrypt_attributes)
+    end
+  end
+  
 end

@@ -1,5 +1,6 @@
 class PwRequest < ActiveRecord::Base
   include UniqueToken
+  include KeyManager::ActiveRecord
   
   has_secure_password(validations: false)
   
@@ -23,16 +24,6 @@ class PwRequest < ActiveRecord::Base
   def set_token
     self.set_unique_token(:list_token)
     self.set_unique_token(:form_token)
-  end
-  
-  def assign_encrypted_attributes(encrypted_attributes)
-    key_manager = KeyManager.instance
-    decrypt_attributes = Hash[
-      encrypted_attributes.map do |attribute, encrypted_value|
-        [attribute, key_manager.private_decrypt_with_decode64(encrypted_value.to_s)]
-      end
-    ]
-    self.assign_attributes(decrypt_attributes)
   end
   
 end

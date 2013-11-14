@@ -12,7 +12,7 @@ describe PwRequestsController do
   describe "POST 'create'" do
     before do
       @key_manager = KeyManager.instance
-      @pw_request_params = {
+      @encrypt_params = {
         password: @key_manager.public_encrypt_with_encode64("testtest"), 
         email: @key_manager.public_encrypt_with_encode64("test@example.com"),
       }
@@ -21,7 +21,7 @@ describe PwRequestsController do
       expect {
         post 'create', 
           public_key: @key_manager.public_key, 
-          pw_request: @pw_request_params
+          encrypt: @encrypt_params
         expect(response.status).to eq(200)
         ["pw_requests/_input_field", "pw_requests/_step2", "pw_requests/_step3"].map do |tpl|
           expect(response).to render_template(tpl)
@@ -32,7 +32,7 @@ describe PwRequestsController do
       expect {
         post 'create', 
           public_key: @key_manager.public_key, 
-          pw_request: @pw_request_params.merge(password: @key_manager.public_encrypt_with_encode64("test"))
+          encrypt: @encrypt_params.merge(password: @key_manager.public_encrypt_with_encode64("test"))
         expect(response.status).to eq(200)
         expect(response).to render_template("pw_requests/_input_field")
       }.not_to change{ PwRequest.count }
