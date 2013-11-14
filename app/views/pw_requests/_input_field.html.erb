@@ -1,0 +1,117 @@
+<%= fields_for :input, pw_request do |f| %>
+
+<div class="form-horizontal">
+<%= content_tag :div, class: form_group_class(f.object, :password) do %>
+  <%= f.label :password, :class => "col-lg-3 control-label input-lg" %>
+  <div class="col-lg-8">
+    <div class="input-group">
+      <%= f.password_field :password, value: f.object.password, class: "form-control input-lg", placeholder: PwRequest.human_attribute_name(:password), readonly: f.object.persisted? %>
+      <span class="input-group-btn">
+        <button id="password_toggle" class="btn btn-default input-lg" type="button" data-toggle="button"><span class="glyphicon glyphicon-eye-close"></span></button>
+      </span>
+    </div>
+    <%= javascript_tag do %>
+      $(function(){
+        function password_glyphicon_toggle(open_type){
+          var element = $("#password_toggle").find("span");
+          var remove_class = "glyphicon-eye-open";
+          var add_class = "glyphicon-eye-close";
+          if($("#input_password").attr("type") == open_type){
+            remove_class = "glyphicon-eye-close";
+            add_class = "glyphicon-eye-open";
+          }
+          element.removeClass(remove_class);
+          element.addClass(add_class);
+        }
+        function password_text_toggle(){
+          $("#input_password").attr("type", $("#input_password").attr("type") == "password" ? "text" : "password");
+        }
+        $("#password_toggle").click(function(){
+          password_glyphicon_toggle("text");
+          password_text_toggle();
+        });
+        $("#password_toggle").hover(
+          function(){
+            password_glyphicon_toggle("password");
+            password_text_toggle();
+          },
+          function(){
+            password_text_toggle();
+            password_glyphicon_toggle("text");
+          }
+        );
+        password_glyphicon_toggle("text");
+      });
+    <% end %>
+    <%= simple_format_error_message(f.object, :password) %>
+    <p class="text-muted">
+      <%- PwExchange::PasswordCharacters.map(&:join).map do |str| -%>
+        <%= content_tag(:small, str, class: "password_char") %>
+      <%- end -%>
+    </p>
+  </div>
+<% end %>
+<div class="text-warning text-center"><%= t("text.input_field_info") %></div>
+
+
+<%- if f.object.new_record? || f.object.email.present? -%>
+<hr />
+
+<%= content_tag :div, class: form_group_class(f.object, :email) do %>
+  <%= f.label :email, :class => "col-lg-4 control-label input-sm" do %>
+    <%= f.object.class.human_attribute_name(:email) %><small class="text-muted">（<%= t("text.option") %>）</small>
+  <% end %>
+  <div class="col-lg-7">
+    <%= f.email_field :email, class: "form-control input-sm", placeholder: PwRequest.human_attribute_name(:email), readonly: f.object.persisted? %>
+    <div id="mail_check_suggest" class="text-info"></div>
+    <%= simple_format_error_message(f.object, :email) %>
+    <p class="text-muted"><%= t("text.email_info") %></p>
+    
+    <%- if f.object.new_record? -%>
+      <%= javascript_tag do %>
+        $(function(){
+          $('#input_email').blur(function() {
+            $(this).mailcheck({
+              domains: mailCheckDomains,
+              topLevelDomains: mailCheckTopLevelDomains,
+              suggested: function(element, suggestion) {
+                var onclick_js = "$('#input_email').val($(this).text());$('#mail_check_suggest').text(''); return false;";
+                $("#mail_check_suggest").html('<a href="#" onclick="' + onclick_js + '">' + suggestion.full + "</a>?");
+              },
+              empty: function(element) {
+                $("#mail_check_suggest").text("");
+              }
+            });
+          });
+        });
+      <% end %>
+    <%- end -%>
+  </div>
+<% end %>
+<%- end -%>
+</div>
+<% end %>
+
+<%- if pw_request.persisted? -%>
+<%= javascript_tag do %>
+  $(function(){
+    $('#completeModal').modal('show').on('hidden.bs.modal', function () {
+      $("div#step2").slideDown();
+      $("div#step3").slideDown("slow");
+    });
+  });
+<% end %>
+<div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="completeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header alert btn-success">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><%= t("text.ready") %></h4>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-default btn-lg btn-block" data-dismiss="modal"><%= t("text.ready_info") %></button>
+      </div>
+    </div>
+  </div>
+</div>
+<%- end -%>

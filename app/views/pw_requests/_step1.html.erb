@@ -1,0 +1,39 @@
+<%= javascript_tag do %>
+  var encrypt = new JSEncrypt();
+  var mailCheckDomains = ['hotmail.com', 'gmail.com', 'aol.com', 'docomo.ne.jp', 'ezweb.ne.jp', 'softbank.ne.jp', 'i.softbank.jp'];
+  var mailCheckTopLevelDomains = ["com", "net", "org", "jp"];
+  $(function() {
+    encrypt.setPublicKey($("#public_key").val());
+    $("#pw_submit").click(function(event){
+      $(".input_section input").each(function(){
+        $("#" + $(this).attr("id").replace(/^input/, "pw_request")).val(encrypt.encrypt($(this).val()));
+      });
+      
+      $.rails.disableElement($(this));
+      $("#pw_request_form").trigger('submit.rails');
+      return false;
+    });
+    
+  });
+<% end %>
+<%= javascript_include_tag "mailcheck.min" %>
+  
+<div id="step1" class="panel panel-primary">
+  <div class="panel-heading"><h2 class="panel-title"><span>Step 1.</span><%= t("text.step1_title") %></h2></div>
+  <div class="panel-body">
+    <%- pw_request = PwRequest.new -%>
+    <div class="input_section">
+      <%= render "input_field", pw_request: pw_request %>
+    </div>
+    <%= form_for pw_request, remote: true, html: {id: :pw_request_form} do |f| %>
+      <%= hidden_field_tag :public_key, KeyManager.instance.public_key %>
+      <%= f.hidden_field :password %>
+      <%= f.hidden_field :email %>
+    <% end %>
+    <p class="text-center">
+      <%= button_tag type: 'button', id: :pw_submit, class: "btn btn-lg btn-success", data: {disable_with: t("text.sending")} do %>
+        <%= t("text.encrypt_and_send") %><span class="glyphicon glyphicon-send" style="margin-left: 5px;"></span>
+      <% end %>
+    </p>
+  </div>
+</div>

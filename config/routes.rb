@@ -55,4 +55,9 @@ PwExchange::Application.routes.draw do
   #   end
   
   root 'index#index'
+  namespace :pw_requests do
+    get "", action: :form, as: "form"
+    post "create", action: :create, as: ""
+    get "list/:list_token", action: :list, as: "list"
+  end
 end

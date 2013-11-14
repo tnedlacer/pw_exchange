@@ -11,3 +11,7 @@
  *= require_self
  * require_tree .
  */
+
+small.password_char{ white-space:nowrap; margin-left:5px; }
+.panel-title span{ font-size: 120%; margin-right: 10px; }
+h4 span{ margin-right: 5px; }

@@ -1,0 +1,10 @@
+<div id="step3" class="panel panel-primary" style="display:none;">
+  <div class="panel-heading"><h2 class="panel-title"><span>Step 3.</span><%= t("text.step3_title") %></h2></div>
+  <div class="panel-body">
+    <h4><span class="glyphicon glyphicon-list"></span><%= t("text.password_list") %></h4>
+    <div class="alert alert-success">
+      <%= link_to pw_requests_list_url(pw_request.list_token), nil, class: "alert-link" %>
+    </div>
+    <p><%= t("text.password_list_info") %></p>
+  </div>
+</div>
