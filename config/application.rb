@@ -21,4 +21,8 @@ module PwExchange
     # config.i18n.default_locale = :de
     config.i18n.available_locales = [:en, :ja]
   end
+  
+  number_alphabet = ["0".."9", "a".."z", "A".."Z"].map(&:to_a)
+  PasswordCharacters = number_alphabet + [(Array("!".."~") - number_alphabet.flatten)]
+  PasswordRegexp = /\A[#{Regexp.escape(PasswordCharacters.flatten.join)}]+\z/
 end

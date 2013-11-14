@@ -3,7 +3,8 @@ class PwResponse < ActiveRecord::Base
   
   belongs_to :pw_request
   
-  validate :password, presence: true, length: { in: 7..140, allow_blank: true }
+  validate :password, presence: true, length: { in: 7..140, allow_blank: true },
+    format: { with: PwExchange::PasswordRegexp, allow_blank: true }
   
   before_save :set_code
   
