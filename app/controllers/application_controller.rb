@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
     ensure
       I18n.locale = cookies[:locale] || I18n.default_locale
     end
+    
+    def render_404
+      raise ActionController::RoutingError.new('Not Found')
+    end
 end
