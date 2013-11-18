@@ -1,0 +1,19 @@
+<%= javascript_tag do %>
+  $(function(){
+    $("div#step2").slideDown("fast", function(){
+      $("div#response_complete_warning").slideDown("slow");
+    });
+  });
+<% end %>
+<div id="step2" class="panel panel-primary" style="display:none;">
+  <div class="panel-heading"><h2 class="panel-title"><%= t("text.response_complete") %></h2></div>
+  <div class="panel-body">
+    <div class="alert alert-success">
+      <%- url = pw_responses_show_url(pw_response.code) -%>
+      <%= link_to url, url, class: "alert-link" %>
+    </div>
+    <p class="text-muted"><%= t("text.response_complete_info") %></p>
+    
+    <div id="response_complete_warning" class="alert alert-warning" style="display:none;"><%= t("text.response_complete_warning") %></div>
+  </div>
+</div>

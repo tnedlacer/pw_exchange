@@ -3,7 +3,8 @@
   <div class="panel-body">
     <h4><span class="glyphicon glyphicon-edit"></span><%= t("text.password_form") %></h4>
     <div class="alert alert-success">
-      <%= link_to pw_requests_list_url(pw_request.list_token), nil, class: "alert-link" %>
+      <%- url = pw_responses_form_url(pw_request.form_token) -%>
+      <%= link_to url, url, class: "alert-link" %>
     </div>
     <p><%= t("text.password_form_info") %></p>
   </div>

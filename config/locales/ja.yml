@@ -220,3 +220,8 @@ ja:
     password_form_info: このURLをパスワードを入力してほしい方に送ってパスワードを入力してもらってください。
     password_list: パスワード一覧
     password_list_info: こちらのページから入力されたパスワードを閲覧できます。
+    response_title: パスワードをご登録ください。
+    response_input_field_info: 近いうちに使うと思いますので大事に保管しておいてください。
+    response_complete: 登録が完了しました。
+    response_complete_info: このURLをあなたに登録を依頼した方にお知らせください。
+    response_complete_warning: もし、パスワードを間違えた場合はブラウザを再読み込みして再度登録してください。

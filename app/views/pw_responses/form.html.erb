@@ -1,0 +1,19 @@
+<div id="content">
+<div id="step1" class="panel panel-primary">
+  <div class="panel-heading"><h2 class="panel-title"><%= t("text.response_title") %></h2></div>
+  <div class="panel-body">
+    <div class="input_section">
+      <%= render "input_field", pw_response: @pw_response %>
+    </div>
+    <%= form_for @pw_response, as: :encrypt, url: pw_responses_create_path(@pw_response.pw_request.form_token), remote: true, html: {id: :encrypt_form} do |f| %>
+      <%= hidden_field_tag :public_key, KeyManager.instance.public_key %>
+      <%= f.hidden_field :password %>
+    <% end %>
+    <p class="text-center">
+      <%= button_tag type: 'button', id: :encrypt_submit, class: "btn btn-lg btn-success", data: {disable_with: t("text.sending")} do %>
+        <%= t("text.encrypt_and_send") %><span class="glyphicon glyphicon-send" style="margin-left: 5px;"></span>
+      <% end %>
+    </p>
+  </div>
+</div>
+</div>

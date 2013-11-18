@@ -1,0 +1,30 @@
+<%= fields_for :input, pw_response do |f| %>
+
+<div class="form-horizontal">
+<%= content_tag :div, class: form_group_class(f.object, :password) do %>
+  <%= f.label :password, :class => "col-lg-3 control-label input-lg" %>
+  <div class="col-lg-8">
+    <div class="input-group">
+      <%= f.password_field :password, value: f.object.password, class: "input_password form-control input-lg", placeholder: PwRequest.human_attribute_name(:password), readonly: f.object.persisted? %>
+      <span class="input-group-btn">
+        <button class="password_toggle btn btn-default input-lg" type="button" data-toggle="button"><span class="glyphicon glyphicon-eye-close"></span></button>
+      </span>
+    </div>
+    <%= javascript_tag do %>
+      jQuery(function(){
+        attach_password_toggle();
+      });
+    <% end %>
+    <%= simple_format_error_message(f.object, :password) %>
+    <p class="text-muted">
+      <%- PwExchange::PasswordCharacters.map(&:join).map do |str| -%>
+        <%= content_tag(:small, str, class: "password_char") %>
+      <%- end -%>
+    </p>
+  </div>
+<% end %>
+<%- if f.object.persisted? -%>
+<div class="text-warning text-center"><%= t("text.response_input_field_info") %></div>
+<%- end -%>
+</div>
+<% end %>

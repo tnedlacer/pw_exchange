@@ -247,3 +247,8 @@ en:
     password_form_info: Please ask them to enter a password and send it to those who want to enter the password to this URL.
     password_list: Password list
     password_list_info: It is a page that can be viewed by the entered password.
+    response_title: Please register a password.
+    response_input_field_info: Please keep it carefully because I think that it is used in the near future.
+    response_complete: Registration is complete.
+    response_complete_info: Please contact this URL to people who were asked to register for you.
+    response_complete_warning: If you make a mistake the password, please register again to reload the browser.
