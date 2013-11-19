@@ -16,11 +16,6 @@
       });
     <% end %>
     <%= simple_format_error_message(f.object, :password) %>
-    <p class="text-muted">
-      <%- PwExchange::PasswordCharacters.map(&:join).map do |str| -%>
-        <%= content_tag(:small, str, class: "password_char") %>
-      <%- end -%>
-    </p>
   </div>
 <% end %>
 <%- if f.object.persisted? -%>
