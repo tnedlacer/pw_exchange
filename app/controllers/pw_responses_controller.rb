@@ -24,6 +24,8 @@ class PwResponsesController < ApplicationController
     
     pw_response = @pw_request.pw_responses.build
     pw_response.assign_encrypted_attributes(params.require(:encrypt).permit(:password))
+    pw_response.remote_ip = request.remote_ip
+    pw_response.user_agent = request.user_agent
     
     if pw_response.save
       html = {}
