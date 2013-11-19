@@ -21,6 +21,17 @@
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
+        <li id="locale" class="dropdown">
+          <%- current_locale = PwExchange::Locales.detect{|loc| I18n.locale == loc[0] } -%>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <%= current_locale[1] %> <span class="caret"></span>
+          </a>
+          <%- PwExchange::Locales.select{|loc| loc != current_locale }.map do |locale| -%>
+            <ul class="dropdown-menu">
+              <li><a href="#" data-locale="<%= locale[0] %>"><%= locale[1] %></a></li>
+            </ul>
+          <%- end -%>
+        </li>
       </ul>
       <h3 class="text-muted">Password Exchange</h3>
     </div>

@@ -7,13 +7,20 @@ class ApplicationController < ActionController::Base
   
   private
     def set_locale
-      locale = cookies[:locale].presence || request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first.to_sym
-      if I18n.available_locales.include?(locale)
+      locale = params[:locale].presence ||
+        cookies[:locale].presence ||
+        request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      
+      if I18n.available_locales.include?(locale.to_sym)
         cookies[:locale] = locale
+      end
+      if params[:locale].present?
+        redirect_to params.except(:locale)
       end
     rescue
     ensure
       I18n.locale = cookies[:locale] || I18n.default_locale
+      p I18n.locale
     end
     
     def render_404

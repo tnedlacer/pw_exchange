@@ -7,6 +7,11 @@ require 'rails/all'
 Bundler.require(:default, Rails.env)
 
 module PwExchange
+  Locales = [
+    [:en, "English"],
+    [:ja, "日本語"],
+  ]
+  
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -19,7 +24,7 @@ module PwExchange
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    config.i18n.available_locales = [:en, :ja]
+    config.i18n.available_locales = PwExchange::Locales.map(&:first)
     
     config.action_controller.include_all_helpers = false
   end

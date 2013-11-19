@@ -65,3 +65,9 @@ jQuery(function() {
 
 });
 
+jQuery(function() {
+  $("#locale .dropdown-menu a").click(function(event){
+    location.href = location.pathname + "?locale=" + $(this).data('locale');
+    return false;
+  });
+});
