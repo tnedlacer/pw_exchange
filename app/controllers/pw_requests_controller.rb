@@ -10,7 +10,7 @@ class PwRequestsController < ApplicationController
     
     pw_request = PwRequest.new
     pw_request.assign_encrypted_attributes(params.require(:encrypt).permit(:password, :email))
-    
+    pw_request.input_options = {locale: I18n.locale}
     if pw_request.save
       html = {}
       ["input_field", "step2", "step3"].map do |template|

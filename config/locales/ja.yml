@@ -225,3 +225,9 @@ ja:
     response_complete: 登録が完了しました。
     response_complete_info: このURLをあなたに登録を依頼した方にお知らせください。
     response_complete_warning: もし、パスワードを間違えた場合はブラウザを再読み込みして再度登録してください。
+  notification_mail:
+    response_registered:
+      subject: パスワードが登録されました。
+      head: あなた宛てにパスワードが届きました。
+      show_url: こちらのURLからご確認ください。
+      list_url: こちらからいままで登録されたすべてのパスワードが閲覧できます。

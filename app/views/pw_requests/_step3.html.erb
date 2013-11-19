@@ -3,7 +3,7 @@
   <div class="panel-body">
     <h4><span class="glyphicon glyphicon-list"></span><%= t("text.password_list") %></h4>
     <div class="alert alert-success">
-      <%- url = pw_requests_list_url(pw_request.list_token) -%>
+      <%- url = pw_request.list_url -%>
       <%= link_to url, url, class: "alert-link" %>
     </div>
     <p><%= t("text.password_list_info") %></p>

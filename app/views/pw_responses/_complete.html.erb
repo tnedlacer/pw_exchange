@@ -9,7 +9,7 @@
   <div class="panel-heading"><h2 class="panel-title"><%= t("text.response_complete") %></h2></div>
   <div class="panel-body">
     <div class="alert alert-success">
-      <%- url = pw_responses_show_url(pw_response.code) -%>
+      <%- url = pw_response.show_url -%>
       <%= link_to url, url, class: "alert-link" %>
     </div>
     <p class="text-muted"><%= t("text.response_complete_info") %></p>

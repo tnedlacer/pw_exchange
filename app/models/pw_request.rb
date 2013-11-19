@@ -26,4 +26,8 @@ class PwRequest < ActiveRecord::Base
     self.set_unique_token(:form_token)
   end
   
+  def list_url
+    Rails.application.routes.url_helpers.pw_requests_list_url(self.list_token)
+  end
+  
 end

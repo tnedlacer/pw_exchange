@@ -252,3 +252,9 @@ en:
     response_complete: Registration is complete.
     response_complete_info: Please contact this URL to people who were asked to register for you.
     response_complete_warning: If you make a mistake the password, please register again to reload the browser.
+  notification_mail:
+    response_registered:
+      subject: Password has been registered.
+      head: Password has arrived.
+      show_url: Please check from this URL.
+      list_url: All passwords that have been registered up to now from here you can view.

@@ -8,6 +8,7 @@ class PwResponse < ActiveRecord::Base
     format: { with: PwExchange::PasswordRegexp, allow_blank: true }
   
   before_save :set_code
+  after_create :send_to_requester
   
   def set_code
     self.set_unique_token(:code)
@@ -25,4 +26,18 @@ class PwResponse < ActiveRecord::Base
   def password
     @password ||= self.escaped_password.to_s.split(EscapedPasswordSeparator).pack("U*")
   end
+  
+  def show_url
+    Rails.application.routes.url_helpers.pw_responses_show_url(self.code)
+  end
+  
+  private
+    def send_to_requester
+      return if self.pw_request.email.blank?
+      
+      I18n.with_locale(self.pw_request.input_options[:locale].presence || I18n.locale) do
+        NotificationMail.response_registered(self).deliver
+      end
+    end
+  
 end
