@@ -34,10 +34,20 @@ describe PwResponse do
       other: "(☝ ՞ਊ ՞)☝ （´◉◞౪◟◉)",
     }.map do |label, value|
       it label do
-        pw_response = FactoryGirl.create(:pw_response, password: value)
+        pw_response = FactoryGirl.create(:pw_response, password: value, allow_all_characters: true)
         pw_response.reload
         expect(pw_response.password).to equal(value)
       end
+    end
+  end
+  context "disallow all characters" do
+    it "valid" do
+      pw_response = FactoryGirl.build(:pw_response, password: "aaaaaaa")
+      expect(pw_response.valid?).to equal(true)
+    end
+    it "invalid" do
+      pw_response = FactoryGirl.build(:pw_response, password: "aaaaaaaあいう")
+      expect(pw_response.valid?).to equal(false)
     end
   end
 end
