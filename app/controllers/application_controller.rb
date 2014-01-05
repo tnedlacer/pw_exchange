@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
     rescue
     ensure
       I18n.locale = cookies[:locale] || I18n.default_locale
-      p I18n.locale
     end
     
     def render_404
