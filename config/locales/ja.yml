@@ -201,6 +201,7 @@ ja:
       <<: *errors
     attributes:
       pw_request:
+        password: 閲覧用パスワード
   attributes:
     password: パスワード
     email: メールアドレス

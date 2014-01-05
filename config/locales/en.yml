@@ -230,6 +230,9 @@ en:
   activerecord:
     errors:
       <<: *errors
+    attributes:
+      pw_request:
+        password: For viewing password
 
   text:
     step1_title: Please register a password for the password for viewing.
