@@ -1,12 +1,12 @@
 class KeyManager
   attr_accessor :rsa
   
-  def initialize(rsa)
-    @rsa = rsa
+  def initialize(key)
+    @rsa = OpenSSL::PKey::RSA.new(key)
   end
   
   def self.my_key
-    self.new OpenSSL::PKey::RSA.new(File.read(Rails.root.join("rsa/rsa_priv.pem")))
+    self.new File.read(Rails.root.join("rsa/rsa_priv.pem"))
   end
   
   def self.my_public_key_eq?(key)
