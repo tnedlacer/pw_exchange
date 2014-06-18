@@ -1,11 +1,16 @@
-require 'singleton'
 class KeyManager
-  include Singleton
-  
   attr_accessor :rsa
   
-  def initialize
-    @rsa = OpenSSL::PKey::RSA.new(File.read(Rails.root.join("rsa/rsa_priv.pem")))
+  def initialize(rsa)
+    @rsa = rsa
+  end
+  
+  def self.my_key
+    self.new OpenSSL::PKey::RSA.new(File.read(Rails.root.join("rsa/rsa_priv.pem")))
+  end
+  
+  def self.my_public_key_eq?(key)
+    [key, self.my_key.public_key].map{|str| str.to_s.gsub(/\s/, "") }.uniq.size != 1
   end
   
   def public_key
@@ -33,7 +38,7 @@ class KeyManager
   
   module ActiveRecord
     def assign_encrypted_attributes(encrypted_attributes)
-      key_manager = KeyManager.instance
+      key_manager = KeyManager.my_key
       decrypt_attributes = Hash[
         encrypted_attributes.map do |attribute, encrypted_value|
           [attribute, key_manager.private_decrypt_with_decode64(encrypted_value.to_s)]

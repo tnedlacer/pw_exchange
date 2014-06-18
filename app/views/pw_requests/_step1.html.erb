@@ -12,7 +12,7 @@
       <%= render "input_field", pw_request: pw_request %>
     </div>
     <%= form_for pw_request, as: :encrypt, remote: true, html: {id: :encrypt_form} do |f| %>
-      <%= hidden_field_tag :public_key, KeyManager.instance.public_key %>
+      <%= hidden_field_tag :public_key, KeyManager.my_key.public_key %>
       <%= f.hidden_field :password %>
       <%= f.hidden_field :email %>
     <% end %>

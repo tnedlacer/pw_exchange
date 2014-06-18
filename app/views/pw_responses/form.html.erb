@@ -6,7 +6,7 @@
       <%= render "input_field", pw_response: @pw_response %>
     </div>
     <%= form_for @pw_response, as: :encrypt, url: pw_responses_create_path(@pw_response.pw_request.form_token), remote: true, html: {id: :encrypt_form} do |f| %>
-      <%= hidden_field_tag :public_key, KeyManager.instance.public_key %>
+      <%= hidden_field_tag :public_key, KeyManager.my_key.public_key %>
       <%= f.hidden_field :password %>
     <% end %>
     <p class="text-center">
