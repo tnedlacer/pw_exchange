@@ -10,7 +10,7 @@ class KeyManager
   end
   
   def self.my_public_key_eq?(key)
-    [key, self.my_key.public_key].map{|str| str.to_s.gsub(/\s/, "") }.uniq.size != 1
+    [key, self.my_key.public_key].map{|str| str.to_s.gsub(/\s/, "") }.uniq.size == 1
   end
   
   def public_key

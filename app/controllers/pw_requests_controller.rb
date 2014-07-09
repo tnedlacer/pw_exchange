@@ -3,7 +3,7 @@ class PwRequestsController < ApplicationController
   end
   
   def create
-    if KeyManager.my_public_key_eq?(params[:public_key]) || params[:encrypt].blank?
+    if !KeyManager.my_public_key_eq?(params[:public_key]) || params[:encrypt].blank?
       alert_html = ApplicationController.helpers.escape_javascript("<div class=\"alert alert-danger\">#{I18n.t("text.send_error")}</div>")
       render js: "$(\"#step1 .input_section\").before(\"#{alert_html}\");"
       return
