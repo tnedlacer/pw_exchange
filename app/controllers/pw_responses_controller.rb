@@ -17,8 +17,7 @@ class PwResponsesController < ApplicationController
   
   def create
     if !KeyManager.my_public_key_eq?(params[:public_key]) || params[:encrypt].blank?
-      alert_html = ApplicationController.helpers.escape_javascript("<div class=\"alert alert-danger\">#{I18n.t("text.send_error")}</div>")
-      render js: "$(\"#step1 .input_section\").before(\"#{alert_html}\");"
+      render js: "$(\"#step1 .input_section\").before(\"#{alert_danger_html_with_escape_javascript(I18n.t("text.send_error"))}\");"
       return
     end
     

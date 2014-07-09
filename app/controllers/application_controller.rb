@@ -25,4 +25,8 @@ class ApplicationController < ActionController::Base
     def render_404
       raise ActionController::RoutingError.new('Not Found')
     end
+    
+    def alert_danger_html_with_escape_javascript(content)
+      ApplicationController.helpers.escape_javascript("<div class=\"alert alert-danger\">#{content}</div>")
+    end
 end
