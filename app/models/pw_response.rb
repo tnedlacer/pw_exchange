@@ -26,7 +26,7 @@ class PwResponse < ActiveRecord::Base
   end
   
   def password
-    @password ||= self.escaped_password.to_s.split(EscapedPasswordSeparator).pack("U*")
+    @password ||= self.escaped_password.to_s.split(EscapedPasswordSeparator).map(&:to_i).pack("U*")
   end
   
   def show_url

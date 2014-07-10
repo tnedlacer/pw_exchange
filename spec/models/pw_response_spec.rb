@@ -35,8 +35,8 @@ describe PwResponse do
     }.map do |label, value|
       it label do
         pw_response = FactoryGirl.create(:pw_response, password: value, allow_all_characters: true)
-        pw_response.reload
-        expect(pw_response.password).to equal(value)
+        pw_response = PwResponse.where(id: pw_response.id).first
+        expect(pw_response.password).to eq(value)
       end
     end
   end
