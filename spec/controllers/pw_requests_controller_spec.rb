@@ -11,7 +11,7 @@ describe PwRequestsController do
 
   describe "POST 'create'" do
     before do
-      @key_manager = KeyManager.instance
+      @key_manager = KeyManager.my_key
       @encrypt_params = {
         password: @key_manager.public_encrypt_with_encode64("testtest"), 
         email: @key_manager.public_encrypt_with_encode64("test@example.com"),

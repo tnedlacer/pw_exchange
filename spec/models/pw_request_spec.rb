@@ -11,7 +11,7 @@ describe PwRequest do
   end
   
   it "assign_encrypted_attributes" do
-    key_manager = KeyManager.instance
+    key_manager = KeyManager.my_key
     pw_request = PwRequest.new
     {password: "testtesttest", email: "testtest@example.com"}.map do |attr, value|
       pw_request.assign_encrypted_attributes({
