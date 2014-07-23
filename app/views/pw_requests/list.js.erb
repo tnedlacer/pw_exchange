@@ -1,0 +1,10 @@
+$("#accordion").append('<%= escape_javascript(render(partial: "pw_response", collection: @pw_responses)) %>');
+<% if @pw_responses.next_page %>
+$("#paginate").attr("href", "<%= url_for(page: @pw_responses.next_page) %>");
+<% else %>
+$("#paginate").hide();
+<% end %>
+
+if(authenticate_complete){
+  $("#encrypt_form.authentication").trigger('submit.rails');
+}

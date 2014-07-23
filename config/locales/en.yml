@@ -240,6 +240,7 @@ en:
     step3_title: Please check the entered password.
     email_info: Notice You will receive an email when the password is registered.
     encrypt_and_send: Encrypt and send
+    encrypt: Encrypt
     sending: Sending...
     send_error: I failed to register. Please register again to reload the browser.
     option: option
@@ -255,9 +256,18 @@ en:
     response_complete: Registration is complete.
     response_complete_info: Please contact this URL to people who were asked to register for you.
     response_complete_warning: If you make a mistake the password, please register again to reload the browser.
+    authenticate: To authenticate
+    generate_key: Generate key
+    please_authenticate: Please authenticate.
+    authenticate_complete: Authentication completion
+    authenticate_failed: I failed authentication.
+    authenticate_reload_browser: Please authenticate again to reload the browser.
   notification_mail:
     response_registered:
       subject: Password has been registered.
       head: Password has arrived.
       show_url: Please check from this URL.
       list_url: All passwords that have been registered up to now from here you can view.
+  pagination:
+    next: Next
+    loading: Loading...

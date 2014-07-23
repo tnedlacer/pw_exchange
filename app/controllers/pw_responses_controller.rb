@@ -1,6 +1,6 @@
 class PwResponsesController < ApplicationController
   
-  before_action :find_form_token
+  before_action :find_form_token, except: [:show]
   
   private
     def find_form_token
@@ -37,4 +37,15 @@ class PwResponsesController < ApplicationController
       render js: "$(\"div.input_section\").html(\"#{input_field_html}\");$.rails.enableElement($(\"#encrypt_submit\"));"
     end
   end
+  
+  def show
+    @pw_responses = PwResponse.where(:code => params[:code])
+    if @pw_responses.blank?
+      render_404
+      return
+    end
+    @pw_request = @pw_responses.first.pw_request
+    render "pw_requests/list"
+  end
+  
 end

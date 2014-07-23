@@ -1,0 +1,46 @@
+<%= javascript_tag do %>
+  var authenticate_complete = false;
+  $(function(){
+    $("#encrypt_form.authentication").bind("submit.rails", function(){
+      $(this).find("#pw_response_ids").remove();
+      $("<input>", {
+        type: "hidden",
+        name: "pw_response_ids",
+        id: "pw_response_ids",
+        value: $(".pw_response:not(.unlock)").map(function(){
+          return $(this).data("id")
+        }).get().join(","),
+      }).appendTo($(this));
+    });
+  });
+  function authenticate_call_back(pw_responses){
+    $.each(pw_responses, function(id,pw){
+      var content = $('#accordion .pw_response #collapse_' + id + ' .pw_response_content');
+      if(content.length == 0) return true;
+      content.text(pw);
+      var pw_response_element = content.closest(".pw_response");
+      pw_response_element.find("span.glyphicon").removeClass("glyphicon-lock").addClass("glyphicon-ok");
+      pw_response_element.addClass("panel-info").removeClass("panel-default");
+      $("#paginate").addClass("btn-info").removeClass("btn-default");
+      pw_response_element.addClass("unlock");
+    });
+    authenticate_complete = true;
+  }
+<% end %>
+
+<div id="content">
+  <%= render "pw_requests/authentication", {pw_request: @pw_request, pw_response_ids: @pw_responses.map(&:id)} %>
+  
+  <div class="panel-group content_inner" id="accordion">
+    <% @pw_responses.map do |pw_response| %>
+      <%= render "pw_requests/pw_response", {pw_response: pw_response} %>
+    <% end %>
+  </div>
+  <% if @pw_responses.respond_to?(:next_page) && @pw_responses.next_page %>
+    <div class="content_inner">
+      <%= link_to safe_join([content_tag(:span, "", class: "glyphicon glyphicon-chevron-down"), t("pagination.next")]), 
+        {page: @pw_responses.next_page}, 
+        {remote: true, data: {disable_with: t("pagination.loading")}, id: :paginate, class: "btn btn-default btn-block"} %>
+    </div>
+  <% end %>
+</div>

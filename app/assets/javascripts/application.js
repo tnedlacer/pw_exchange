@@ -54,9 +54,7 @@ var encrypt = new JSEncrypt();
 jQuery(function() {
   encrypt.setPublicKey($("#public_key").val());
   $("#encrypt_submit").click(function(event){
-    $(".input_section input").each(function(){
-      $("#" + $(this).attr("id").replace(/^input/, "encrypt")).val(encrypt.encrypt($(this).val()));
-    });
+    set_encrypt_form(".input_section input");
 
     $.rails.disableElement($(this));
     $("#encrypt_form").trigger('submit.rails');
@@ -64,6 +62,11 @@ jQuery(function() {
   });
 
 });
+function set_encrypt_form(input_form_selector){
+  $(input_form_selector).each(function(){
+    $("#" + $(this).attr("id").replace(/^input/, "encrypt")).val(encrypt.encrypt($(this).val()));
+  });
+}
 
 jQuery(function() {
   $("#locale .dropdown-menu a").click(function(event){

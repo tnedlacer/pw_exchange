@@ -1,0 +1,61 @@
+<% call_back ||= :authenticate_call_back %>
+<%= javascript_tag do %>
+  var user_encrypt = null;
+  $(function(){
+    var encrypt_and_sending = function(){
+      $("#user_public_key").val(user_encrypt.getPublicKey());
+      set_progress("<%= t("text.encrypt") %>", 60);
+      set_encrypt_form("#authentication .form-horizontal input");
+      set_progress("<%= t("text.sending") %>", 90);
+      $("#encrypt_form.authentication").trigger('submit.rails');
+    }
+    $("#authenticate_submit").click(function(event){
+      var bar = set_progress("", 0);
+      bar.removeClass().addClass("progress-bar progress-bar-info");
+      $("#authentication .progress").show();
+      if(!user_encrypt){
+        set_progress("<%= t("text.generate_key") %>", 30);
+        setTimeout(function(){
+          user_encrypt = new JSEncrypt({default_key_size: 2048});
+          user_encrypt.getKey();
+          encrypt_and_sending();
+        },200);
+      }else{
+        encrypt_and_sending();
+      }
+      return false;
+    });
+  });
+  function set_progress(label, value){
+    var bar = $("#authentication .progress div");
+    bar.text(label);
+    bar.attr("aria-valuenow", value);
+    bar.css({width: value + "%"});
+    return bar;
+  }
+<% end %>
+<div id="authentication">
+  <div class="form-horizontal">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <div class="input-group">
+          <%= password_field_tag :input_password, nil, class: "input_password form-control input-lg", placeholder: PwRequest.human_attribute_name(:password) %>
+          <span class="input-group-btn">
+            <%= button_tag t("text.authenticate"), type: 'button', id: :authenticate_submit, class: "btn btn-primary input-lg" %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="progress" style="display:none;">
+    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</div>
+
+<%= form_tag pw_requests_authentication_path, remote: true, id: :encrypt_form, class: :authentication do %>
+  <%= hidden_field_tag :public_key, KeyManager.my_key.public_key %>
+  <%= hidden_field_tag :user_public_key, nil %>
+  <%= hidden_field_tag :password, nil, id: :encrypt_password %>
+  <%= hidden_field_tag :pw_request_id, pw_request.id %>
+  <%= hidden_field_tag :call_back, call_back %>
+<% end %>

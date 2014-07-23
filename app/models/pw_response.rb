@@ -2,6 +2,8 @@ class PwResponse < ActiveRecord::Base
   include UniqueToken
   include KeyManager::ActiveRecord
   
+  paginates_per 10
+  
   attr_accessor :allow_all_characters
   
   belongs_to :pw_request

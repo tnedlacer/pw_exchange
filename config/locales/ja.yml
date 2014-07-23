@@ -210,6 +210,7 @@ ja:
     step2_title: パスワードを入力してもらってください。
     step3_title: 入力されたパスワードを確認します。
     email_info: パスワードが登録された際にお知らせメールが届きます。
+    encrypt: 暗号化
     encrypt_and_send: 暗号化して送信
     sending: 送信中...
     send_error: 登録に失敗しました。ブラウザを再読み込みして再度登録してください。
@@ -226,9 +227,18 @@ ja:
     response_complete: 登録が完了しました。
     response_complete_info: このURLをあなたに登録を依頼した方にお知らせください。
     response_complete_warning: もし、パスワードを間違えた場合はブラウザを再読み込みして再度登録してください。
+    authenticate: 認証する
+    generate_key: 鍵を生成
+    please_authenticate: 認証をしてください。
+    authenticate_complete: 認証完了
+    authenticate_failed: 認証に失敗しました。
+    authenticate_reload_browser: ブラウザを再読み込みして再度認証をおこなってください。
   notification_mail:
     response_registered:
       subject: パスワードが登録されました。
       head: あなた宛てにパスワードが届きました。
       show_url: こちらのURLからご確認ください。
       list_url: こちらからいままで登録されたすべてのパスワードが閲覧できます。
+  pagination:
+    next: 次へ
+    loading: 読み込み中...

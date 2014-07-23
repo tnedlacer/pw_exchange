@@ -60,6 +60,7 @@ PwExchange::Application.routes.draw do
     get "", action: :form, as: "form"
     post "create", action: :create, as: ""
     get "list/:list_token", action: :list, as: "list"
+    post "authentication", action: :authentication, as: "authentication"
   end
   
   namespace :pw_responses do

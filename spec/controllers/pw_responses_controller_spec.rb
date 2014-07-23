@@ -55,4 +55,17 @@ describe PwResponsesController do
     end
   end
 
+  describe "GET 'show'" do
+    before do
+      @pw_response = FactoryGirl.create(:pw_response, pw_request_id: @pw_request.id)
+    end
+    it "returns http success" do
+      get 'show', code: @pw_response.code
+      response.should be_success
+      ["pw_requests/list"].map do |tpl|
+        expect(response).to render_template(tpl)
+      end
+    end
+  end
+
 end
