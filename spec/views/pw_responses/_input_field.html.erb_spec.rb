@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe "pw_responses/_input_field.html.erb" do
+describe "pw_responses/_input_field.html.erb", :type => :view do
   before do
-    view.stub(:form_group_class).and_return(true)
-    view.stub(:simple_format_error_message).and_return(true)
+    allow(view).to receive(:form_group_class).and_return(true)
+    allow(view).to receive(:simple_format_error_message).and_return(true)
   end
   
   it "new pw_response" do
-    view.stub(:pw_response) { PwResponse.new }
+    allow(view).to receive(:pw_response) { PwResponse.new }
     render
 
     expect(rendered).not_to match /text\-warning/
   end
   
   it "pw_response persisted" do
-    view.stub(:pw_response) { FactoryGirl.create(:pw_response) }
+    allow(view).to receive(:pw_response) { FactoryGirl.create(:pw_response) }
     render
 
     expect(rendered).to match /text\-warning/

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PwRequest do
+describe PwRequest, :type => :model do
   context "create" do
     it "token has entered" do
       pw_request = FactoryGirl.create(:pw_request)

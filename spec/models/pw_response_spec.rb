@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PwResponse do
+describe PwResponse, :type => :model do
   context "create" do
     before do
       @pw_response = FactoryGirl.create(:pw_response)

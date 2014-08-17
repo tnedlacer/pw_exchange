@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe PwRequestsController do
+describe PwRequestsController, :type => :controller do
 
   describe "GET 'form'" do
     it "returns http success" do
       get 'form'
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -54,7 +54,7 @@ describe PwRequestsController do
     end
     it "returns http success" do
       get 'list', list_token: @pw_request.list_token
-      response.should be_success
+      expect(response).to be_success
       ["pw_requests/list"].map do |tpl|
         expect(response).to render_template(tpl)
       end
@@ -64,7 +64,7 @@ describe PwRequestsController do
         FactoryGirl.create(:pw_response, pw_request_id: @pw_request.id)
       end
       get 'list', list_token: @pw_request.list_token, page: 2
-      response.should be_success
+      expect(response).to be_success
       expect(assigns[:pw_responses].current_page).to eq(2)
     end
   end
@@ -86,7 +86,7 @@ describe PwRequestsController do
     end
     it "returns http success" do
       post 'authentication', @params
-      response.should be_success
+      expect(response).to be_success
       expect(response).to render_template(nil)
       expect(response.body).to match /#{Regexp.escape(I18n.t("text.authenticate_complete"))}.*user_encrypt\.decrypt/
       expect(response.body).to match /#{Regexp.escape(@params[:call_back])}/
@@ -94,7 +94,7 @@ describe PwRequestsController do
     end
     it "returns authenticate failed" do
       post 'authentication', @params.merge(password: @key_manager.public_encrypt_with_encode64("authentication_failed"))
-      response.should be_success
+      expect(response).to be_success
       expect(response).to render_template(nil)
       expect(response.body).to match /#{Regexp.escape(I18n.t("text.authenticate_failed"))}/
     end

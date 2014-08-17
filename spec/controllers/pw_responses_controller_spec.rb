@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PwResponsesController do
+describe PwResponsesController, :type => :controller do
   before do
     @pw_request = FactoryGirl.create(:pw_request)
   end
@@ -10,7 +10,7 @@ describe PwResponsesController do
   describe "GET 'form'" do
     it "returns http success" do
       get 'form', form_token: @pw_request.form_token
-      response.should be_success
+      expect(response).to be_success
     end
   end
 
@@ -61,7 +61,7 @@ describe PwResponsesController do
     end
     it "returns http success" do
       get 'show', code: @pw_response.code
-      response.should be_success
+      expect(response).to be_success
       ["pw_requests/list"].map do |tpl|
         expect(response).to render_template(tpl)
       end

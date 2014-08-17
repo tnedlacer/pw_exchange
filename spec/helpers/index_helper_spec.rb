@@ -10,5 +10,5 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe IndexHelper do
+describe IndexHelper, :type => :helper do
 end

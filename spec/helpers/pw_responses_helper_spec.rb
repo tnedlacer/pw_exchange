@@ -10,5 +10,5 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe PwResponsesHelper do
+describe PwResponsesHelper, :type => :helper do
 end
