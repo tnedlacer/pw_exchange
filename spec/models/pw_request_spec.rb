@@ -4,7 +4,7 @@ describe PwRequest, :type => :model do
   context "create" do
     it "token has entered" do
       pw_request = FactoryGirl.create(:pw_request)
-      [:list_token, :form_token].map do |attr|
+      [:list_token, :form_token, :key].map do |attr|
         expect(pw_request.try(attr)).to be_present
       end
     end

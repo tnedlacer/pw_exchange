@@ -7,7 +7,7 @@ describe "pw_responses/_input_field.html.erb", :type => :view do
   end
   
   it "new pw_response" do
-    allow(view).to receive(:pw_response) { PwResponse.new }
+    allow(view).to receive(:pw_response) { FactoryGirl.build(:pw_response) }
     render
 
     expect(rendered).not_to match /text\-warning/

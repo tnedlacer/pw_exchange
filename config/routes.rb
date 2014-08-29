@@ -59,13 +59,13 @@ Rails.application.routes.draw do
   namespace :pw_requests do
     get "", action: :form, as: "form"
     post "create", action: :create, as: ""
-    get "list/:list_token", action: :list, as: "list"
+    get "list/:list_token/:key", action: :list, as: "list"
     post "authentication", action: :authentication, as: "authentication"
   end
   
   namespace :pw_responses do
-    get "form/:form_token", action: :form, as: "form"
-    post "create/:form_token", action: :create, as: "create"
-    get "show/:code", action: :show, as: "show"
+    get "form/:form_token/:key", action: :form, as: "form"
+    post "create/:form_token/:key", action: :create, as: "create"
+    get "show/:code/:key", action: :show, as: "show"
   end
 end

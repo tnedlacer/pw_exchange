@@ -18,21 +18,22 @@ class PwResponse < ActiveRecord::Base
     self.set_unique_token(:code)
   end
   
-  # DBのエンコードの制限に引っかからないように文字をエスケープする
-  EscapedPasswordSeparator = ","
-  
   def password=(value)
     @password = value.to_s
-    self.escaped_password = @password.unpack("U*").join(EscapedPasswordSeparator)
+    self.encrypted_password = self.pw_request.encryptor.encrypt_and_sign(@password)
     @password
   end
   
   def password
-    @password ||= self.escaped_password.to_s.split(EscapedPasswordSeparator).map(&:to_i).pack("U*")
+    @password ||= begin
+        self.pw_request.encryptor.decrypt_and_verify(self.encrypted_password)
+      rescue ActiveSupport::MessageVerifier::InvalidSignature
+        nil
+      end
   end
   
   def show_url
-    Rails.application.routes.url_helpers.pw_responses_show_url(self.code)
+    Rails.application.routes.url_helpers.pw_responses_show_url(self.code, self.pw_request.key)
   end
   
   private

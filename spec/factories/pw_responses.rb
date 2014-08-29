@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :pw_response do
-    association :pw_request, strategy: :build
+    association :pw_request
     password "MyPassword"
     remote_ip "192.168.0.1"
     user_agent "Firefox"

@@ -5,7 +5,7 @@ class PwResponsesController < ApplicationController
   private
     def find_form_token
       @pw_request = PwRequest.where(:form_token => params[:form_token]).first
-      if @pw_request.blank?
+      if @pw_request.blank? || !@pw_request.authenticate_key(params[:key])
         render_404
       end
     end
@@ -39,12 +39,12 @@ class PwResponsesController < ApplicationController
   end
   
   def show
-    @pw_responses = PwResponse.where(:code => params[:code])
-    if @pw_responses.blank?
+    @pw_responses = PwResponse.where(:code => params[:code]).preload(:pw_request)
+    @pw_request = @pw_responses.first.pw_request if @pw_responses.present?
+    if @pw_responses.blank? || !@pw_request.authenticate_key(params[:key])
       render_404
       return
     end
-    @pw_request = @pw_responses.first.pw_request
     render "pw_requests/list"
   end
   

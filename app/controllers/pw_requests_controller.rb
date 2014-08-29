@@ -44,7 +44,7 @@ class PwRequestsController < ApplicationController
     
     pw_request = PwRequest.where(:id => params[:pw_request_id]).first
     key_manager = KeyManager.my_key
-    if pw_request.present? && pw_request.authenticate(key_manager.private_decrypt_with_decode64(params[:password]))
+    if pw_request.present? && pw_request.authenticate(key_manager.private_decrypt_with_decode64(params[:password])) && pw_request.authenticate_key(params[:key])
       pw_responses = pw_request.pw_responses.where(:id => params[:pw_response_ids].to_s.split(","))
       user_key_manager = KeyManager.new(params[:user_public_key])
       js_objects = pw_responses.map do |res|

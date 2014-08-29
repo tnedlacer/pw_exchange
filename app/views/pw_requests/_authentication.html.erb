@@ -55,6 +55,7 @@
 <%= form_tag pw_requests_authentication_path, remote: true, id: :encrypt_form, class: :authentication do %>
   <%= hidden_field_tag :public_key, KeyManager.my_key.public_key %>
   <%= hidden_field_tag :user_public_key, nil %>
+  <%= hidden_field_tag :key, params[:key] %>
   <%= hidden_field_tag :password, nil, id: :encrypt_password %>
   <%= hidden_field_tag :pw_request_id, pw_request.id %>
   <%= hidden_field_tag :call_back, call_back %>

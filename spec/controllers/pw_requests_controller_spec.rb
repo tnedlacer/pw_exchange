@@ -53,7 +53,7 @@ describe PwRequestsController, :type => :controller do
       @pw_request = FactoryGirl.create(:pw_request)
     end
     it "returns http success" do
-      get 'list', list_token: @pw_request.list_token
+      get 'list', list_token: @pw_request.list_token, key: @pw_request.key
       expect(response).to be_success
       ["pw_requests/list"].map do |tpl|
         expect(response).to render_template(tpl)
@@ -61,9 +61,9 @@ describe PwRequestsController, :type => :controller do
     end
     it "returns next page" do
       20.times do
-        FactoryGirl.create(:pw_response, pw_request_id: @pw_request.id)
+        FactoryGirl.create(:pw_response, pw_request: @pw_request)
       end
-      get 'list', list_token: @pw_request.list_token, page: 2
+      get 'list', list_token: @pw_request.list_token, key: @pw_request.key, page: 2
       expect(response).to be_success
       expect(assigns[:pw_responses].current_page).to eq(2)
     end
@@ -74,11 +74,12 @@ describe PwRequestsController, :type => :controller do
       @key_manager = KeyManager.my_key
       @user_key = OpenSSL::PKey::RSA.generate(2048)
       @pw_request = FactoryGirl.create(:pw_request, password: "authentication_test")
-      @pw_response = FactoryGirl.create(:pw_response, pw_request_id: @pw_request.id)
+      @pw_response = FactoryGirl.create(:pw_response, pw_request: @pw_request)
       @params = {
         public_key: @key_manager.public_key,
         password: @key_manager.public_encrypt_with_encode64("authentication_test"), 
         user_public_key: @user_key.public_key,
+        key: @pw_request.key,
         pw_request_id: @pw_request.id,
         pw_response_ids: [@pw_response.id].join(","),
         call_back: "call_back_method"

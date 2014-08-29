@@ -9,7 +9,7 @@ describe PwResponsesController, :type => :controller do
   end
   describe "GET 'form'" do
     it "returns http success" do
-      get 'form', form_token: @pw_request.form_token
+      get 'form', form_token: @pw_request.form_token, key: @pw_request.key
       expect(response).to be_success
     end
   end
@@ -24,8 +24,9 @@ describe PwResponsesController, :type => :controller do
     it "returns http success save" do
       expect {
         post 'create', 
-          public_key: @key_manager.public_key, 
+          public_key: @key_manager.public_key,
           form_token: @pw_request.form_token,
+          key: @pw_request.key,
           encrypt: @encrypt_params
         expect(response.status).to eq(200)
         ["pw_responses/_input_field", "pw_responses/_complete"].map do |tpl|
@@ -36,8 +37,9 @@ describe PwResponsesController, :type => :controller do
     it "returns http success error" do
       expect {
         post 'create', 
-          public_key: @key_manager.public_key, 
+          public_key: @key_manager.public_key,
           form_token: @pw_request.form_token, 
+          key: @pw_request.key,
           encrypt: @encrypt_params.merge(password: @key_manager.public_encrypt_with_encode64("test"))
         expect(response.status).to eq(200)
         expect(response).to render_template("pw_responses/_input_field")
@@ -46,7 +48,8 @@ describe PwResponsesController, :type => :controller do
     it "returns http public_key not found" do
       expect {
         post 'create',
-          form_token: @pw_request.form_token, 
+          form_token: @pw_request.form_token,
+          key: @pw_request.key,
           pw_request: @pw_request_params
         expect(response.status).to eq(200)
         expect(response).to render_template(nil)
@@ -57,10 +60,10 @@ describe PwResponsesController, :type => :controller do
 
   describe "GET 'show'" do
     before do
-      @pw_response = FactoryGirl.create(:pw_response, pw_request_id: @pw_request.id)
+      @pw_response = FactoryGirl.create(:pw_response, pw_request: @pw_request)
     end
     it "returns http success" do
-      get 'show', code: @pw_response.code
+      get 'show', code: @pw_response.code, key: @pw_response.pw_request.key
       expect(response).to be_success
       ["pw_requests/list"].map do |tpl|
         expect(response).to render_template(tpl)

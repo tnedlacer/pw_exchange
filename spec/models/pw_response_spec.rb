@@ -8,8 +8,8 @@ describe PwResponse, :type => :model do
     it "code has entered" do
       expect(@pw_response.code).to be_present
     end
-    it "escaped_password has entered" do
-      expect(@pw_response.escaped_password).to be_present
+    it "encrypted_password has entered" do
+      expect(@pw_response.encrypted_password).to be_present
     end
   end
   context "send_to_requester" do
@@ -35,7 +35,9 @@ describe PwResponse, :type => :model do
     }.map do |label, value|
       it label do
         pw_response = FactoryGirl.create(:pw_response, password: value, allow_all_characters: true)
+        pw_request = pw_response.pw_request
         pw_response = PwResponse.where(id: pw_response.id).first
+        pw_response.pw_request.key = pw_request.key
         expect(pw_response.password).to eq(value)
       end
     end
