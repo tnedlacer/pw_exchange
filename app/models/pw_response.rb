@@ -1,15 +1,11 @@
 class PwResponse < ActiveRecord::Base
   include UniqueToken
   include KeyManager::ActiveRecord
+  include PasswordAttribute
   
   paginates_per 10
   
-  attr_accessor :allow_all_characters
-  
   belongs_to :pw_request
-  
-  validates :password, presence: true, length: { in: 7..140, allow_blank: true }, 
-    format: { with: PwExchange::PasswordRegexp, allow_blank: true, unless: :allow_all_characters }
   
   before_save :set_code
   after_create :send_to_requester
@@ -18,18 +14,8 @@ class PwResponse < ActiveRecord::Base
     self.set_unique_token(:code)
   end
   
-  def password=(value)
-    @password = value.to_s
-    self.encrypted_password = self.pw_request.encryptor.encrypt_and_sign(@password)
-    @password
-  end
-  
-  def password
-    @password ||= begin
-        self.pw_request.encryptor.decrypt_and_verify(self.encrypted_password)
-      rescue ActiveSupport::MessageVerifier::InvalidSignature
-        nil
-      end
+  def encryptor
+    self.pw_request.encryptor
   end
   
   def show_url

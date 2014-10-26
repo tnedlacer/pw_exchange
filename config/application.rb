@@ -32,4 +32,8 @@ module PwExchange
   number_alphabet = ["0".."9", "a".."z", "A".."Z"].map(&:to_a)
   PasswordCharacters = number_alphabet + [(Array("!".."~") - number_alphabet.flatten)]
   PasswordRegexp = /\A[#{Regexp.escape(PasswordCharacters.flatten.join)}]+\z/
+  PasswordLength = 7..140
+  
+  EmailRegexp = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+  EmailLength = 5..200
 end
