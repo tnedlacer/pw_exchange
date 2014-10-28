@@ -16,7 +16,6 @@ describe "pw_requests/_input_field.html.erb", :type => :view do
   it "pw_request persisted" do
     allow(view).to receive(:pw_request) { FactoryGirl.create(:pw_request) }
     render
-
     expect(rendered).to match /completeModal/
   end
   
