@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 describe NotificationMail, :type => :mailer do
   describe "response_registered" do

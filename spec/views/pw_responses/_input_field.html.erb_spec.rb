@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "pw_responses/_input_field.html.erb", :type => :view do
   before do
