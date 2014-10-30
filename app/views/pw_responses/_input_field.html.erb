@@ -5,7 +5,7 @@
   <%= f.label :password, :class => "col-lg-3 control-label input-lg" %>
   <div class="col-lg-8">
     <div class="input-group">
-      <%= f.password_field :password, value: f.object.password, class: "input_password form-control input-lg", placeholder: PwResponse.human_attribute_name(:password), readonly: f.object.persisted? %>
+      <%= f.password_field :password, value: nil, class: "input_password form-control input-lg store_value", placeholder: PwResponse.human_attribute_name(:password), readonly: f.object.persisted? %>
       <span class="input-group-btn">
         <button class="password_toggle btn btn-default input-lg" type="button" data-toggle="button"><span class="glyphicon glyphicon-eye-close"></span></button>
       </span>

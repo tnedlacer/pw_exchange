@@ -14,8 +14,13 @@ describe "pw_requests/_input_field.html.erb", :type => :view do
   end
   
   it "pw_request persisted" do
-    allow(view).to receive(:pw_request) { FactoryGirl.create(:pw_request) }
+    pw_request = FactoryGirl.create(:pw_request)
+    allow(view).to receive(:pw_request) { pw_request }
     render
+
+    [:password, :email].map do |attr|
+      expect(rendered).not_to match /#{Regexp.escape(pw_request.try(attr))}/
+    end
     expect(rendered).to match /completeModal/
   end
   

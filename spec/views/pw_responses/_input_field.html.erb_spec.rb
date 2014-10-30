@@ -14,9 +14,11 @@ describe "pw_responses/_input_field.html.erb", :type => :view do
   end
   
   it "pw_response persisted" do
-    allow(view).to receive(:pw_response) { FactoryGirl.create(:pw_response) }
+    pw_response = FactoryGirl.create(:pw_response)
+    allow(view).to receive(:pw_response) { pw_response }
     render
-
+    
+    expect(rendered).not_to match /#{Regexp.escape(pw_response.password)}/
     expect(rendered).to match /text\-warning/
   end
 end

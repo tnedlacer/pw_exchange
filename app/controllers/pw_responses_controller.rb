@@ -31,10 +31,10 @@ class PwResponsesController < ApplicationController
       ["input_field", "complete"].map do |template|
         html[template.to_sym] = ApplicationController.helpers.escape_javascript(render_to_string(partial: template, locals: {pw_response: pw_response}))
       end
-      render js: "$(\"#encrypt_submit\").hide(); $(\"div.input_section\").html(\"#{html[:input_field]}\"); $(\"div#content\").append(\"#{html[:complete]}\");"
+      render js: "$(\"#encrypt_submit\").hide(); store_values(); $(\"div.input_section\").html(\"#{html[:input_field]}\"); restore_values(); $(\"div#content\").append(\"#{html[:complete]}\");"
     else
       input_field_html = ApplicationController.helpers.escape_javascript(render_to_string(partial: "input_field", locals: {pw_response: pw_response}))
-      render js: "$(\"div.input_section\").html(\"#{input_field_html}\");$.rails.enableElement($(\"#encrypt_submit\"));"
+      render js: "store_values(); $(\"div.input_section\").html(\"#{input_field_html}\"); restore_values(); $.rails.enableElement($(\"#encrypt_submit\"));"
     end
   end
   

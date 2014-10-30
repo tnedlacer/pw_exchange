@@ -5,7 +5,7 @@
   <%= f.label :password, :class => "col-lg-3 control-label input-lg" %>
   <div class="col-lg-8">
     <div class="input-group">
-      <%= f.password_field :password, value: f.object.password, class: "input_password form-control input-lg", placeholder: PwRequest.human_attribute_name(:password), readonly: f.object.persisted? %>
+      <%= f.password_field :password, value: nil, class: "input_password form-control input-lg store_value", placeholder: PwRequest.human_attribute_name(:password), readonly: f.object.persisted? %>
       <span class="input-group-btn">
         <button class="password_toggle btn btn-default input-lg" type="button" data-toggle="button"><span class="glyphicon glyphicon-eye-close"></span></button>
       </span>
@@ -34,7 +34,7 @@
     <%= f.object.class.human_attribute_name(:email) %><small class="text-muted">（<%= t("text.option") %>）</small>
   <% end %>
   <div class="col-lg-7">
-    <%= f.email_field :email, class: "form-control input-sm", placeholder: PwRequest.human_attribute_name(:email), readonly: f.object.persisted? %>
+    <%= f.email_field :email, value: nil, class: "form-control input-sm store_value", placeholder: PwRequest.human_attribute_name(:email), readonly: f.object.persisted? %>
     <div id="mail_check_suggest" class="text-info"></div>
     <%= simple_format_error_message(f.object, :email) %>
     <p class="text-muted"><%= t("text.email_info") %></p>

@@ -74,3 +74,15 @@ jQuery(function() {
     return false;
   });
 });
+
+var stored_values = {};
+function store_values(){
+  $(".store_value").each(function(){
+    stored_values[$(this).attr("name")] = $(this).val();
+  });
+}
+function restore_values(){
+  $.each(stored_values, function(name, value){
+    $(".store_value[name=\"" + name + "\"]").val(value);
+  });
+}
