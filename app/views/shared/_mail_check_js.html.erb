@@ -1,0 +1,25 @@
+<%= javascript_tag do %>
+  var mailCheckDomains = ['hotmail.com', 'gmail.com', 'aol.com', 'icloud.com', 'me.com', 'mac.com', 'docomo.ne.jp', 'ezweb.ne.jp', 'softbank.ne.jp', 'i.softbank.jp'];
+  var mailCheckTopLevelDomains = ["com", "net", "org", "jp"];
+  function mail_check(selector){
+    $(selector).each(function(){
+      if($(this).next("div.mail_check_suggest").length == 0){
+        $('<div>', { class: "mail_check_suggest text-info" }).insertAfter(this);
+      }
+      var onclick_js = "$(this).parent().prev().val($(this).text());$(this).parent().text(''); return false;";
+      $(this).blur(function(){
+        $(this).mailcheck({
+          domains: mailCheckDomains,
+          topLevelDomains: mailCheckTopLevelDomains,
+          suggested: function(element, suggestion) {
+            $(element).next().html('<a href="#" onclick="' + onclick_js + '">' + suggestion.full + "</a>?");
+          },
+          empty: function(element) {
+            $(element).next().text("");
+          }
+        });
+      });
+    });
+  }
+<% end %>
+<%= javascript_include_tag "mailcheck.min" %>

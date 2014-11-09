@@ -1,8 +1,4 @@
-<%= javascript_tag do %>
-  var mailCheckDomains = ['hotmail.com', 'gmail.com', 'aol.com', 'docomo.ne.jp', 'ezweb.ne.jp', 'softbank.ne.jp', 'i.softbank.jp'];
-  var mailCheckTopLevelDomains = ["com", "net", "org", "jp"];
-<% end %>
-<%= javascript_include_tag "mailcheck.min" %>
+<%= render "shared/mail_check_js" %>
   
 <div id="step1" class="panel panel-primary">
   <div class="panel-heading"><h2 class="panel-title"><span>Step 1.</span><%= t("text.step1_title") %></h2></div>

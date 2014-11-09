@@ -34,27 +34,14 @@
     <%= f.object.class.human_attribute_name(:email) %><small class="text-muted">（<%= t("text.option") %>）</small>
   <% end %>
   <div class="col-lg-7">
-    <%= f.email_field :email, value: nil, class: "form-control input-sm store_value", placeholder: PwRequest.human_attribute_name(:email), readonly: f.object.persisted? %>
-    <div id="mail_check_suggest" class="text-info"></div>
+    <%= f.email_field :email, value: nil, class: "form-control input-sm store_value email", placeholder: PwRequest.human_attribute_name(:email), readonly: f.object.persisted? %>
     <%= simple_format_error_message(f.object, :email) %>
     <p class="text-muted"><%= t("text.email_info") %></p>
     
     <%- if f.object.new_record? -%>
       <%= javascript_tag do %>
         $(function(){
-          $('#input_email').blur(function() {
-            $(this).mailcheck({
-              domains: mailCheckDomains,
-              topLevelDomains: mailCheckTopLevelDomains,
-              suggested: function(element, suggestion) {
-                var onclick_js = "$('#input_email').val($(this).text());$('#mail_check_suggest').text(''); return false;";
-                $("#mail_check_suggest").html('<a href="#" onclick="' + onclick_js + '">' + suggestion.full + "</a>?");
-              },
-              empty: function(element) {
-                $("#mail_check_suggest").text("");
-              }
-            });
-          });
+          mail_check(".email");
         });
       <% end %>
     <%- end -%>
