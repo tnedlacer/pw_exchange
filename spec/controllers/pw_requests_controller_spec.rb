@@ -40,7 +40,7 @@ describe PwRequestsController, :type => :controller do
     it "returns http public_key not found" do
       expect {
         post 'create',
-          pw_request: @pw_request_params
+          encrypt: @encrypt_params
         expect(response.status).to eq(200)
         expect(response).to render_template(nil)
         expect(response.body).to match /alert alert\-danger/
