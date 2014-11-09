@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :pw_sender do
     password "MyPassword"
+    email_0 "email@example.com"
   end
 end

@@ -1,0 +1,11 @@
+<div id="step2" class="panel panel-primary" style="display:none;">
+  <div class="panel-heading"><h2 class="panel-title"><span>Step 2.</span><%= t("text.sender_step2_title") %></h2></div>
+  <div class="panel-body">
+    <h4><%= t("text.password_display") %></h4>
+    <div class="alert alert-success">
+      <%- url = "pw_recipients_form_url(#{pw_sender.form_token}, #{pw_sender.key})" -%>
+      <%= link_to url, url, class: "alert-link" %>
+    </div>
+    <p><%= t("text.password_display_info") %></p>
+  </div>
+</div>

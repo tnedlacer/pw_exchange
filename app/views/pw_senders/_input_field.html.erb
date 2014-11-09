@@ -1,0 +1,74 @@
+<%= fields_for :input, pw_sender do |f| %>
+
+<div class="form-horizontal">
+<%= content_tag :div, class: form_group_class(f.object, :password) do %>
+  <%= f.label :password, :class => "col-lg-3 control-label input-lg" %>
+  <div class="col-lg-8">
+    <div class="input-group">
+      <%= f.password_field :password, value: nil, class: "input_password form-control input-lg store_value", placeholder: PwSender.human_attribute_name(:password), readonly: f.object.persisted? %>
+      <span class="input-group-btn">
+        <button class="password_toggle btn btn-default input-lg" type="button" data-toggle="button"><span class="glyphicon glyphicon-eye-close"></span></button>
+      </span>
+    </div>
+    <%= javascript_tag do %>
+      jQuery(function(){
+        attach_password_toggle()
+      });
+    <% end %>
+    <%= simple_format_error_message(f.object, :password) %>
+    <p class="text-muted">
+      <%- PwExchange::PasswordCharacters.map(&:join).map do |str| -%>
+        <%= content_tag(:small, str, class: "password_char") %>
+      <%- end -%>
+    </p>
+  </div>
+<% end %>
+
+<% f.object.build_pw_recipients if f.object.pw_recipients.blank? %>
+<div class="form-group pw_recipients">
+  <div class="col-lg-12">
+    <%= content_tag :div, class: f.object.pw_recipients.any?{|pw_recipient| pw_recipient.errors[:email].present? } ? "has-error" : nil do %>
+      <label><%= PwRecipient.human_attribute_name(:email) %></label>
+    <% end %>
+    <%= f.fields_for :pw_recipients do |ff| %>
+      <%= content_tag :div, class: ff.object.errors[:email].present? ? "has-error" : nil do %>
+        <%= ff.email_field :email, value: nil, class: "form-control email store_value", id: "input_email_#{ff.index}", placeholder: t("attributes.email"), readonly: f.object.persisted? %>
+        <%= simple_format_error_message(ff.object, :email) %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<%- if f.object.new_record? -%>
+  <%= javascript_tag do %>
+    $(function(){
+      mail_check(".email");
+    });
+  <% end %>
+<%- end -%>
+
+</div>
+<% end %>
+
+<%- if pw_sender.persisted? -%>
+<%= javascript_tag do %>
+  $(function(){
+    $('#completeModal').modal('show').on('hidden.bs.modal', function () {
+      $("div#step2").slideDown();
+    });
+  });
+<% end %>
+<div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="completeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header alert btn-success">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><%= t("text.ready") %></h4>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-default btn-lg btn-block" data-dismiss="modal"><%= t("text.ready_info") %></button>
+      </div>
+    </div>
+  </div>
+</div>
+<%- end -%>

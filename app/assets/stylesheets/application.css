@@ -20,3 +20,4 @@ h4 span{ margin-right: 5px; }
 #accordion .pw_response .panel-heading{ cursor: pointer; }
 #paginate span{ margin-right: 10px; }
 .pw_response .pw_response_content{ word-break: break-all; }
+.pw_recipients input.email{ margin: 5px 0; }

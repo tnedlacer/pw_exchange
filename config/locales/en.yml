@@ -233,6 +233,8 @@ en:
     attributes:
       pw_request:
         password: For viewing password
+      pw_recipient:
+        email: Email address of people who want to tell the password
 
   text:
     step1_title: Please register a password for the password for viewing.
@@ -262,6 +264,10 @@ en:
     authenticate_complete: Authentication completion
     authenticate_failed: I failed authentication.
     authenticate_reload_browser: Please authenticate again to reload the browser.
+    sender_step1_title: Please register the email address of people who want to tell the password and password.
+    sender_step2_title: Please send this URL to people who want to tell the password.
+    password_display: Password display
+    password_display_info: Only people that can receive e-mail address of "Step 1" can view the password.
   notification_mail:
     response_registered:
       subject: Password has been registered.

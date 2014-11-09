@@ -202,6 +202,8 @@ ja:
     attributes:
       pw_request:
         password: 閲覧用パスワード
+      pw_recipient:
+        email: パスワードを伝えたい人のメールアドレス
   attributes:
     password: パスワード
     email: メールアドレス
@@ -233,6 +235,10 @@ ja:
     authenticate_complete: 認証完了
     authenticate_failed: 認証に失敗しました。
     authenticate_reload_browser: ブラウザを再読み込みして再度認証をおこなってください。
+    sender_step1_title: パスワードとパスワードを伝えたい人のメールアドレスを登録してください。
+    sender_step2_title: このURLをパスワードを伝えたい人に送ってください。
+    password_display: パスワード表示ページ
+    password_display_info: Step 1のメールアドレスを受信できる人のみがパスワードを表示できます。
   notification_mail:
     response_registered:
       subject: パスワードが登録されました。

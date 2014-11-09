@@ -1,0 +1,23 @@
+<%= render "shared/mail_check_js" %>
+  
+<div id="step1" class="panel panel-primary">
+  <div class="panel-heading"><h2 class="panel-title"><span>Step 1.</span><%= t("text.sender_step1_title") %></h2></div>
+  <div class="panel-body">
+    <%- pw_sender = PwSender.new -%>
+    <div class="input_section">
+      <%= render "input_field", pw_sender: pw_sender %>
+    </div>
+    <%= form_for pw_sender, as: :encrypt, remote: true, html: {id: :encrypt_form} do |f| %>
+      <%= hidden_field_tag :public_key, KeyManager.my_key.public_key %>
+      <%= f.hidden_field :password %>
+      <% PwSender::EmailAttributes.map do |attr| %>
+        <%= f.hidden_field attr %>
+      <% end %>
+    <% end %>
+    <p class="text-center">
+      <%= button_tag type: 'button', id: :encrypt_submit, class: "btn btn-lg btn-success", data: {disable_with: t("text.sending")} do %>
+        <%= t("text.encrypt_and_send") %><span class="glyphicon glyphicon-send" style="margin-left: 5px;"></span>
+      <% end %>
+    </p>
+  </div>
+</div>
