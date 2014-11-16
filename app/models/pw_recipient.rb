@@ -1,5 +1,6 @@
 class PwRecipient < ActiveRecord::Base
   belongs_to :pw_sender
+  has_many :authentications, class_name: "PwRecipientAuthentication"
   
   validates :email,
     format: { with: PwExchange::EmailRegexp, allow_blank: true },
