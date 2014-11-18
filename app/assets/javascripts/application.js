@@ -56,7 +56,7 @@ jQuery(function() {
   $("#encrypt_submit").click(function(event){
     set_encrypt_form(".input_section input");
 
-    $.rails.disableElement($(this));
+    $.rails.disableFormElement($(this));
     $("#encrypt_form").trigger('submit.rails');
     return false;
   });
