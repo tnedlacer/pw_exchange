@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     end
     
     def alert_danger_html_with_escape_javascript(content)
-      ApplicationController.helpers.escape_javascript("<div class=\"alert alert-danger\">#{content}</div>")
+      ApplicationController.helpers.escape_javascript(
+        %Q!<div class="alert alert-danger alert-dismissible" role="alert">! +
+          %Q!<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>! +
+          %Q!#{content}</div>!
+      )
     end
 end

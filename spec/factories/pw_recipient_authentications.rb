@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :pw_recipient_authentication do
-    pw_recipient nil
+    association :pw_recipient
   end
 end

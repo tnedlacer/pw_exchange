@@ -3,7 +3,7 @@
   <div class="panel-body">
     <h4><%= t("text.password_display") %></h4>
     <div class="alert alert-success">
-      <%- url = "pw_recipients_form_url(#{pw_sender.form_token}, #{pw_sender.key})" -%>
+      <%- url = pw_recipients_form_url(pw_sender.form_token, pw_sender.key) -%>
       <%= link_to url, url, class: "alert-link" %>
     </div>
     <p><%= t("text.password_display_info") %></p>

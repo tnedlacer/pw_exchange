@@ -204,6 +204,8 @@ ja:
         password: 閲覧用パスワード
       pw_recipient:
         email: パスワードを伝えたい人のメールアドレス
+      pw_recipient_authentication:
+        password: 認証コード
   attributes:
     password: パスワード
     email: メールアドレス
@@ -239,12 +241,21 @@ ja:
     sender_step2_title: このURLをパスワードを伝えたい人に送ってください。
     password_display: パスワード表示ページ
     password_display_info: Step 1のメールアドレスを受信できる人のみがパスワードを表示できます。
+    recipient_step1_title: あなたのメールアドレスを入力してください。
+    recipient_email_not_found: このメールアドレスではパスワードを表示できません。
+    recipient_email_field_info: このメールアドレスに認証コードが届きます。
+    recipient_send_mail_success: 認証コードを送信しました。
+    recipient_step2_title: メールに記載された認証コードを入力してください。
+    recipient_click_to_display: クリックで表示
   notification_mail:
     response_registered:
       subject: パスワードが登録されました。
       head: あなた宛てにパスワードが届きました。
       show_url: こちらのURLからご確認ください。
       list_url: こちらからいままで登録されたすべてのパスワードが閲覧できます。
+    pw_recipient_password:
+      subject: 認証コード
+      head: パスワードを表示するための認証コードです。
   pagination:
     next: 次へ
     loading: 読み込み中...

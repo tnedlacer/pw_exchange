@@ -6,4 +6,10 @@ class NotificationMail < ActionMailer::Base
 
     mail to: pw_response.pw_request.email
   end
+  
+  def pw_recipient_password(pw_recipient_authentication)
+    @pw_recipient_authentication = pw_recipient_authentication
+    
+    mail to: pw_recipient_authentication.pw_recipient.email
+  end
 end

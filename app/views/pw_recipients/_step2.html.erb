@@ -1,0 +1,52 @@
+<%= javascript_tag do %>
+  var user_encrypt = null;
+  function create_user_encrypt(){
+    user_encrypt = new JSEncrypt({default_key_size: 2048});
+    user_encrypt.getKey();
+  }
+  $(function(){
+    $("#step2 #encrypt_submit").click(function(event){
+      set_encrypt_form("#step2 .input_section input");
+      if(!user_encrypt){
+        create_user_encrypt();
+      }
+      $("#step2 #user_public_key").val(user_encrypt.getPublicKey());
+      $.rails.disableFormElement($(this));
+      $("#step2 #encrypt_form").trigger('submit.rails');
+      return false;
+    });
+  });
+<% end %>
+
+<div class="alert alert-success text-center" role="alert"><%= t("text.recipient_send_mail_success") %></div>
+
+<% pw_recipient_authentication = PwRecipientAuthentication.new %>
+<div id="step2" class="panel panel-primary" style="display:none;">
+  <div class="panel-heading"><h2 class="panel-title"><span>Step 2.</span><%= t("text.recipient_step2_title") %></h2></div>
+  <div class="panel-body">
+    <div class="input_section">
+      <%= fields_for :input, pw_recipient_authentication do |f| %>
+        <div class="form-horizontal">
+        <%= content_tag :div, class: form_group_class(f.object, :password) do %>
+          <%= f.label :password, :class => "col-lg-3 control-label input-lg" %>
+          <div class="col-lg-8">
+            <%= f.email_field :password, value: nil, class: "form-control input-lg store_value", placeholder: f.object.class.human_attribute_name(:password) %>
+            <%= simple_format_error_message(f.object, :password) %>
+          </div>
+        <% end %>
+        </div>
+      <% end %>
+    </div>
+    <%= form_for pw_recipient_authentication, as: :encrypt, url: pw_recipients_show_path(@pw_sender.form_token, @pw_sender.key), remote: true, html: {id: :encrypt_form} do |f| %>
+      <%= hidden_field_tag :public_key, KeyManager.my_key.public_key %>
+      <%= hidden_field_tag :user_public_key, nil %>
+      <%= f.hidden_field :session_id %>
+      <%= f.hidden_field :password %>
+    <% end %>
+    <p class="text-center">
+      <%= button_tag type: 'button', id: :encrypt_submit, class: "btn btn-lg btn-success", data: {disable_with: t("text.sending")} do %>
+        <%= t("text.encrypt_and_send") %><span class="glyphicon glyphicon-send" style="margin-left: 5px;"></span>
+      <% end %>
+    </p>
+  </div>
+</div>

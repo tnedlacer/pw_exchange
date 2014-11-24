@@ -74,4 +74,10 @@ Rails.application.routes.draw do
     post "create", action: :create, as: ""
   end
   
+  namespace :pw_recipients do
+    get ":form_token/:key", action: :form, as: "form"
+    post "send_mail/:form_token/:key", action: :send_mail, as: "send_mail"
+    post "show/:form_token/:key", action: :show, as: "show"
+  end
+ 
 end

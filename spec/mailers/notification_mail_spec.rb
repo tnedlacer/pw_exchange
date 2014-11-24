@@ -17,5 +17,22 @@ describe NotificationMail, :type => :mailer do
       expect(mail.body.encoded).to match(@pw_response.show_url)
     end
   end
+  
+  describe "pw_recipient_password" do
+    before do
+      @pw_recipient_authentication = FactoryGirl.create(:pw_recipient_authentication)
+    end
+    let(:mail) { NotificationMail.pw_recipient_password(@pw_recipient_authentication) }
+
+    it "renders the headers" do
+      expect(mail.subject).to eq("Authentication code")
+      expect(mail.to).to eq([@pw_recipient_authentication.pw_recipient.email])
+      expect(mail.from).to eq(["from@example.com"])
+    end
+
+    it "renders the body" do
+      expect(mail.body.encoded).to match(@pw_recipient_authentication.password)
+    end
+  end
 
 end

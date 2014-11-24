@@ -235,6 +235,8 @@ en:
         password: For viewing password
       pw_recipient:
         email: Email address of people who want to tell the password
+      pw_recipient_authentication:
+        password: Authentication code
 
   text:
     step1_title: Please register a password for the password for viewing.
@@ -267,13 +269,22 @@ en:
     sender_step1_title: Please register the email address of people who want to tell the password and password.
     sender_step2_title: Please send this URL to people who want to tell the password.
     password_display: Password display
-    password_display_info: Only people that can receive e-mail address of "Step 1" can view the password.
+    password_display_info: Only people that can receive email address of "Step 1" can view the password.
+    recipient_step1_title: Please enter your email address.
+    recipient_email_not_found: You can not display the password in this email address.
+    recipient_email_field_info: Send the authentication code to this email address.
+    recipient_send_mail_success: Sent the authentication code.
+    recipient_step2_title: Please enter the authorization code that was in the email.
+    recipient_click_to_display: Click to display
   notification_mail:
     response_registered:
       subject: Password has been registered.
       head: Password has arrived.
       show_url: Please check from this URL.
       list_url: All passwords that have been registered up to now from here you can view.
+    pw_recipient_password:
+      subject: Authentication code
+      head: The authentication code to display the password.
   pagination:
     next: Next
     loading: Loading...

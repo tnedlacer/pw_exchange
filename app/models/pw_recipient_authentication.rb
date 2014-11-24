@@ -9,6 +9,10 @@ class PwRecipientAuthentication < ActiveRecord::Base
   
   def set_random_string
     self.set_unique_token(:session_id, 30)
-    self.password = SecureRandom.hex(5)
+    self.password = SecureRandom.hex(5).downcase
+  end
+  
+  def send_password
+    NotificationMail.pw_recipient_password(self).deliver
   end
 end

@@ -17,7 +17,7 @@ small.password_char{ white-space:nowrap; margin-left:5px; }
 h4 span{ margin-right: 5px; }
 #authentication{ margin: 10px 5%; }
 .content_inner { margin: 20px 3%; }
-#accordion .pw_response .panel-heading{ cursor: pointer; }
+#accordion .pw_response .panel-heading, .pw_recipient .panel-heading{ cursor: pointer; }
 #paginate span{ margin-right: 10px; }
-.pw_response .pw_response_content{ word-break: break-all; }
+.pw_response .pw_response_content, .pw_recipient #collapse_password{ word-break: break-all; }
 .pw_recipients input.email{ margin: 5px 0; }
