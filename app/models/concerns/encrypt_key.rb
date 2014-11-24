@@ -6,7 +6,7 @@ module EncryptKey
   end
   
   def set_encrypt_key
-    self.key ||= SecureRandom.hex(10)
+    self.key ||= SecureRandom.hex(5)
     self.key_digest ||= BCrypt::Password.create(self.key)
   end
   
