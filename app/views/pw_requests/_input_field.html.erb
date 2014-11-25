@@ -2,8 +2,8 @@
 
 <div class="form-horizontal">
 <%= content_tag :div, class: form_group_class(f.object, :password) do %>
-  <%= f.label :password, :class => "col-lg-3 control-label input-lg" %>
-  <div class="col-lg-8">
+  <%= f.label :password, :class => "col-md-3 control-label input-lg" %>
+  <div class="col-md-8">
     <div class="input-group">
       <%= f.password_field :password, value: nil, class: "input_password form-control input-lg store_value", placeholder: PwRequest.human_attribute_name(:password), readonly: f.object.persisted? %>
       <span class="input-group-btn">
@@ -30,10 +30,10 @@
 <hr />
 
 <%= content_tag :div, class: form_group_class(f.object, :email) do %>
-  <%= f.label :email, :class => "col-lg-4 control-label input-sm" do %>
+  <%= f.label :email, :class => "col-md-3 control-label input-sm" do %>
     <%= f.object.class.human_attribute_name(:email) %><small class="text-muted">（<%= t("text.option") %>）</small>
   <% end %>
-  <div class="col-lg-7">
+  <div class="col-md-8">
     <%= f.email_field :email, value: nil, class: "form-control input-sm store_value email", placeholder: PwRequest.human_attribute_name(:email), readonly: f.object.persisted? %>
     <%= simple_format_error_message(f.object, :email) %>
     <p class="text-muted"><%= t("text.email_info") %></p>
