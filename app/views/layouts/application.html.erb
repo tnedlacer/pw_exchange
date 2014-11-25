@@ -7,15 +7,14 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag "/bootstrap/css/bootstrap.min", media: "screen" %>
-  <%= stylesheet_link_tag "/bootstrap/css/jumbotron-narrow", media: "screen" %>
+  <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css", media: "screen" %>
   <!--[if lt IE 9]>
     <%= javascript_include_tag "html5shiv.min", "respond.min" %>
   <![endif]-->
 </head>
 <body>
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="header">
       <ul class="nav nav-pills pull-right">
         <li class="active"><a href="#">Home</a></li>
@@ -43,6 +42,6 @@
     </div>
 
   </div>
-<%= javascript_include_tag "/bootstrap/js/bootstrap.min.js" %>
+  <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" %>
 </body>
 </html>
