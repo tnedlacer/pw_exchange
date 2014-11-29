@@ -237,6 +237,9 @@ en:
         email: Email address of people who want to tell the password
       pw_recipient_authentication:
         password: Authentication code
+  attributes:
+    password: password
+    email: email
 
   text:
     step1_title: Please register a password for the password for viewing.
