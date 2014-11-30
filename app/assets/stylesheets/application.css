@@ -15,6 +15,8 @@
 body{ padding: 20px; }
 .header, .footer{ padding: 15px 0; }
 .header{ margin-bottom: 19px; border-bottom: 1px solid #e5e5e5; }
+.introduction li.list-group-item.text-left span.glyphicon{ margin-right: 5px;}
+.introduction li.list-group-item.text-right span.glyphicon{ margin-left: 5px;}
 small.password_char{ white-space:nowrap; margin-left:5px; }
 .panel-title span{ font-size: 120%; margin-right: 10px; }
 h4 span{ margin-right: 5px; }

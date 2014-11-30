@@ -210,6 +210,19 @@ ja:
     password: パスワード
     email: メールアドレス
   text:
+    you: あなた
+    other: 相手
+    index_read: 暗号化によって安全にそして便利にパスワードが交換できます。
+    pw_requests_title: パスワードを受け取る
+    pw_requests_list1: 閲覧用パスワードを登録
+    pw_requests_list2: パスワード入力ページを相手に送信
+    pw_requests_list3: パスワードを入力
+    pw_requests_list4: 入力されたパスワードを表示
+    pw_senders_title: パスワードを送る
+    pw_senders_list1: パスワードと相手のメールアドレスを登録
+    pw_senders_list2: パスワード表示ページを相手に送信
+    pw_senders_list3: メールアドレスを入力
+    pw_senders_list4: メールで認証してパスワードを表示
     step1_title: パスワード閲覧用のパスワードを登録してください。
     step2_title: パスワードを入力してもらってください。
     step3_title: 入力されたパスワードを確認します。

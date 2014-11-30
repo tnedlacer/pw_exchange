@@ -1,29 +1,45 @@
 <div class="jumbotron">
-  <h1>Jumbotron heading</h1>
-  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-  <p><a class="btn btn-lg btn-success" href="#">Sign up today</a></p>
+  <h1><%= PwExchange::SiteName %></h1>
+  <p class="lead"><%= t("text.index_read") %></p>
 </div>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Subheading</h4>
-    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-    <h4>Subheading</h4>
-    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-    <h4>Subheading</h4>
-    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+<div class="row introduction">
+  <div class="col-md-6 pw_requests">
+    <div class="panel panel-info">
+      <div class="panel-body">
+        <%= link_to t("text.pw_requests_title"), pw_requests_form_path, class: "btn btn-info btn-lg btn-block" %>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="row">
+            <strong class="col-md-6 text-center"><%= t("text.you") %></strong>
+            <strong class="col-md-6 text-center"><%= t("text.other") %></strong>
+          </div>
+        </li>
+        <li class="list-group-item text-left"><span aria-hidden="true" class="glyphicon glyphicon-edit"></span><%= t("text.pw_requests_list1") %></li>
+        <li class="list-group-item text-left"><span aria-hidden="true" class="glyphicon glyphicon-share"></span><%= t("text.pw_requests_list2") %></li>
+        <li class="list-group-item text-right"><%= t("text.pw_requests_list3") %><span aria-hidden="true" class="glyphicon glyphicon-edit"></span></li>
+        <li class="list-group-item text-left"><span aria-hidden="true" class="glyphicon glyphicon-check"></span><%= t("text.pw_requests_list4") %></li>
+      </ul>
+    </div>
   </div>
-
-  <div class="col-lg-6">
-    <h4>Subheading</h4>
-    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-    <h4>Subheading</h4>
-    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-    <h4>Subheading</h4>
-    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+  <div class="col-md-6 pw_senders">
+    <div class="panel panel-info">
+      <div class="panel-body">
+        <%= link_to t("text.pw_senders_title"), pw_senders_form_path, class: "btn btn-info btn-lg btn-block" %>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="row">
+            <strong class="col-md-6 text-center"><%= t("text.you") %></strong>
+            <strong class="col-md-6 text-center"><%= t("text.other") %></strong>
+          </div>
+        </li>
+        <li class="list-group-item text-left"><span aria-hidden="true" class="glyphicon glyphicon-edit"></span><%= t("text.pw_senders_list1") %></li>
+        <li class="list-group-item text-left"><span aria-hidden="true" class="glyphicon glyphicon-share"></span><%= t("text.pw_senders_list2") %></li>
+        <li class="list-group-item text-right"><%= t("text.pw_senders_list3") %><span aria-hidden="true" class="glyphicon glyphicon-edit"></span></li>
+        <li class="list-group-item text-right"><%= t("text.pw_senders_list4") %><span aria-hidden="true" class="glyphicon glyphicon-check"></span></li>
+      </ul>
+    </div>
   </div>
 </div>
