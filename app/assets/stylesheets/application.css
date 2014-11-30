@@ -13,8 +13,9 @@
  */
 
 body{ padding: 20px; }
-.header, .footer{ padding: 15px 0; }
-.header{ margin-bottom: 19px; border-bottom: 1px solid #e5e5e5; }
+.page-header h3 span{ margin-right: 5px; }
+.page-header h3 a:hover{ text-decoration: none; color: #777; }
+.page-footer{ padding: 15px 0; text-align: center; }
 .introduction li.list-group-item.text-left span.glyphicon{ margin-right: 5px;}
 .introduction li.list-group-item.text-right span.glyphicon{ margin-left: 5px;}
 small.password_char{ white-space:nowrap; margin-left:5px; }
