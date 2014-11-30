@@ -3,19 +3,21 @@
   var mailCheckTopLevelDomains = ["com", "net", "org", "jp"];
   function mail_check(selector){
     $(selector).each(function(){
-      if($(this).next("div.mail_check_suggest").length == 0){
-        $('<div>', { class: "mail_check_suggest text-info" }).insertAfter(this);
-      }
-      var onclick_js = "$(this).parent().prev().val($(this).text());$(this).parent().text(''); return false;";
+      var onclick_js = "$('[aria-describedby=' + $(this).parents('.popover').attr('id') + ']').val($(this).text()).popover('destroy'); return false;"
       $(this).blur(function(){
         $(this).mailcheck({
           domains: mailCheckDomains,
           topLevelDomains: mailCheckTopLevelDomains,
           suggested: function(element, suggestion) {
-            $(element).next().html('<a href="#" onclick="' + onclick_js + '">' + suggestion.full + "</a>?");
+            $(element).popover({
+              placement : "bottom",
+              container: 'body',
+              content: '<a href="#" onclick="' + onclick_js + '">' + suggestion.full + "</a>?",
+              html: true
+            }).popover("show");
           },
           empty: function(element) {
-            $(element).next().text("");
+            $(element).popover("destroy");
           }
         });
       });
