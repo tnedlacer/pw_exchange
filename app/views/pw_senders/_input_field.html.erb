@@ -43,6 +43,9 @@
   <%= javascript_tag do %>
     $(function(){
       mail_check(".email");
+      $("#encrypt_form").bind("submit.rails", function(){
+        destroy_mail_check_suggest();
+      });
     });
   <% end %>
 <%- end -%>

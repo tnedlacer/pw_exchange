@@ -12,7 +12,7 @@
             $(element).popover({
               placement : "bottom",
               container: 'body',
-              content: '<a href="#" onclick="' + onclick_js + '">' + suggestion.full + "</a>?",
+              content: '<a href="#" class="mail_check_suggest" onclick="' + onclick_js + '">' + suggestion.full + "</a>?",
               html: true
             }).popover("show");
           },
@@ -21,6 +21,11 @@
           }
         });
       });
+    });
+  }
+  function destroy_mail_check_suggest(){
+    $(".mail_check_suggest").each(function(){
+      $("[aria-describedby=" + $(this).parents('.popover').attr("id") + "]").popover("destroy");
     });
   }
 <% end %>
