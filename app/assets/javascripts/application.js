@@ -51,7 +51,7 @@ function password_text_toggle(){
 
 
 var encrypt = new JSEncrypt();
-jQuery(function() {
+$(function(){
   encrypt.setPublicKey($("#public_key").val());
   $("#encrypt_submit").click(function(event){
     set_encrypt_form(".input_section input");
@@ -68,7 +68,7 @@ function set_encrypt_form(input_form_selector){
   });
 }
 
-jQuery(function() {
+$(function(){
   $("#locale .dropdown-menu a").click(function(event){
     location.href = location.pathname + "?locale=" + $(this).data('locale');
     return false;
