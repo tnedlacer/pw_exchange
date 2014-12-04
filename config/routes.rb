@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   #   end
   
   root 'index#index'
+  get "about", controller: :index, action: :about
   
   namespace :pw_requests do
     get "", action: :form, as: "form"

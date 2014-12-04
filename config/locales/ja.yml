@@ -226,6 +226,8 @@ ja:
     pw_senders_list2: パスワード表示ページを相手に送信
     pw_senders_list3: メールアドレスを入力
     pw_senders_list4: メールで認証してパスワードを表示
+    about_open_source: このソフトフェアはオープンソースです。
+    about_contact: お問い合わせ
     step1_title: パスワード閲覧用のパスワードを登録してください。
     step2_title: パスワードを入力してもらってください。
     step3_title: 入力されたパスワードを確認します。

@@ -18,8 +18,7 @@
     <div class="page-header">
       <ul class="nav nav-pills pull-right">
         <%= content_tag :li, link_to("Home", root_path), class: current_page?(root_path) ? "active" : nil %>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <%= content_tag :li, link_to("About", about_path), class: current_page?(about_path) ? "active" : nil %>
         <li id="locale" class="dropdown">
           <%- current_locale = PwExchange::Locales.detect{|loc| I18n.locale == loc[0] } -%>
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">

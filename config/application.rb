@@ -30,6 +30,7 @@ module PwExchange
   end
   
   SiteName = "PwExchange"
+  AdminEmail = "admin@example.com"
   
   number_alphabet = ["0".."9", "a".."z", "A".."Z"].map(&:to_a)
   PasswordCharacters = number_alphabet + [(Array("!".."~") - number_alphabet.flatten)]

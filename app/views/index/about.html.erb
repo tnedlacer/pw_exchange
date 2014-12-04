@@ -1,0 +1,19 @@
+<h2><%= t("text.about_open_source") %></h2>
+
+<div class="well">
+  <p>Copyright <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> 2014 tnedlacer</p>
+  <p>Released under the MIT license</p>
+  <p><%= link_to *Array.new(2, "http://opensource.org/licenses/mit-license.php"), target: "_blank" %></p>
+</div>
+
+<%= javascript_tag do %>
+$(function(){
+  $('address').html(<%= PwExchange::AdminEmail.split("@").to_json.html_safe %>.join("&#64;"));
+});
+<% end %>
+<div class="panel panel-warning">
+  <div class="panel-heading"><%= t("text.about_contact") %></div>
+  <div class="panel-body">
+    <address></address>
+  </div>
+</div>
