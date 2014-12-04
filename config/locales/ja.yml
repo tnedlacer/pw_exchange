@@ -212,7 +212,10 @@ ja:
   text:
     you: あなた
     other: 相手
-    index_read: 暗号化によって安全にそして便利にパスワードが交換できます。
+    index_lead: 簡単、便利、安全にパスワードの交換ができます。
+    index_feature1: シンプルな画面操作
+    index_feature2: ２種類の交換方法
+    index_feature3: 2048ビットのRSAによる暗号化
     pw_requests_title: パスワードを受け取る
     pw_requests_list1: 閲覧用パスワードを登録
     pw_requests_list2: パスワード入力ページを相手に送信

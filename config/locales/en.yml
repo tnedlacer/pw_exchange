@@ -244,7 +244,10 @@ en:
   text:
     you: You
     other: Other party
-    index_read: Password can be exchanged safely and conveniently by encryption.
+    index_lead: Exchange of simple and convenient and secure password.
+    index_feature1: Simple operation
+    index_feature2: Two ways of exchange
+    index_feature3: 2048 Encryption with bits of RSA
     pw_requests_title: Request the password
     pw_requests_list1: Register the viewing password
     pw_requests_list2: Send password input page to the other party
