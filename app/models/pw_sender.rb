@@ -8,7 +8,7 @@ class PwSender < ActiveRecord::Base
   EmailAttributes = Array(0...MaxPwRecipient).map{|i| "email_#{i}".to_sym }
   attr_accessor *EmailAttributes
   
-  has_many :pw_recipients
+  has_many :pw_recipients, dependent: :destroy
   accepts_nested_attributes_for :pw_recipients
   
   before_validation :build_pw_recipients

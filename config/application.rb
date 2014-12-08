@@ -39,4 +39,10 @@ module PwExchange
   
   EmailRegexp = /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   EmailLength = 5..200
+  
+  def self.delete_old_data
+    [PwRequest, PwSender].map do |klass|
+      klass.where(klass.arel_table[:created_at].lt(1.week.ago)).destroy_all
+    end
+  end
 end

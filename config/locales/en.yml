@@ -260,6 +260,7 @@ en:
     pw_senders_list4: View password authenticates by email
     about_open_source: This software is open source.
     about_contact: Contact us
+    delete_info: Registered data will be deleted after about a week.
     step1_title: Please register a password for the password for viewing.
     step2_title: Please ask them to enter a password.
     step3_title: Please check the entered password.

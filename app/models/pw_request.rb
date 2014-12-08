@@ -6,7 +6,7 @@ class PwRequest < ActiveRecord::Base
   
   has_secure_password(validations: false)
   
-  has_many :pw_responses
+  has_many :pw_responses, dependent: :destroy
   
   validates :password, presence: { on: :create }, 
     length: { within: PwExchange::PasswordLength, allow_blank: true }, 
