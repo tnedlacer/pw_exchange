@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'openssl'
+require 'optparse'
+params = ARGV.getopts("f")
 
 rsa_path = File.expand_path('../../rsa',  __FILE__)
 rsa = OpenSSL::PKey::RSA.generate(2048)
@@ -12,7 +14,7 @@ Dir::mkdir(rsa_path, 0755) unless File.exist?(rsa_path)
   ["rsa_pub.pem", rsa.public_key, 0644]
 ].map do |filename, pkey, perm|
   filepath = File.join(rsa_path, filename)
-  if File.exist?(filepath)
+  if !params["f"] && File.exist?(filepath)
     answer = nil
     until(["y", "n"].include?(answer.to_s))
       print "Do you want to overwrite the \"#{filepath}\"?[y/N]"
