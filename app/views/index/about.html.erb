@@ -6,6 +6,13 @@
   <p><%= link_to *Array.new(2, "http://opensource.org/licenses/mit-license.php"), target: "_blank" %></p>
 </div>
 
+<div class="panel panel-success">
+  <div class="panel-heading"><%= t("text.about_source") %></div>
+  <div class="panel-body">
+    <%= link_to *Array.new(2, "https://github.com/tnedlacer/pw_exchange"), target: "_blank" %>
+  </div>
+</div>
+
 <%= javascript_tag do %>
 $(function(){
   $('address').html(<%= PwExchange::AdminEmail.split("@").to_json.html_safe %>.join("&#64;"));
