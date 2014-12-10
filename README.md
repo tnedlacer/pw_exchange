@@ -1,4 +1,4 @@
-pw_exchange
+PwExchange
 ===========
 
 WEB application for exchange password
