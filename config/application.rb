@@ -25,7 +25,10 @@ module PwExchange
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.i18n.available_locales = PwExchange::Locales.map(&:first)
-    
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
+
     config.action_controller.include_all_helpers = false
   end
   

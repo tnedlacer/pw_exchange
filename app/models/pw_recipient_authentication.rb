@@ -13,6 +13,6 @@ class PwRecipientAuthentication < ActiveRecord::Base
   end
   
   def send_password
-    NotificationMail.pw_recipient_password(self).deliver
+    NotificationMail.pw_recipient_password(self).deliver_now
   end
 end

@@ -27,7 +27,7 @@ class PwResponse < ActiveRecord::Base
       return if self.pw_request.email.blank?
       
       I18n.with_locale(self.pw_request.input_options[:locale].presence || I18n.locale) do
-        NotificationMail.response_registered(self).deliver
+        NotificationMail.response_registered(self).deliver_now
       end
     end
   
